@@ -9,15 +9,6 @@ export default function Circle() {
   const totalSlides = 7;
 
   useEffect(() => {
-    const carousel = document.getElementById("testimonial-carousel");
-
-    function showTestimonial(index: number) {
-      setCurrentSlide(index);
-      if (carousel) {
-        carousel.style.transform = `translateX(-${index * 100}%)`;
-      }
-    }
-
     // Auto-advance carousel every 5 seconds
     const autoAdvance = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % totalSlides);
@@ -134,8 +125,8 @@ export default function Circle() {
               <div className="w-full flex-shrink-0 px-4">
                 <div className="text-center">
                   <p className="font-montserrat text-[14px] text-white mb-4">
-                    "Бид байгаль орчны чанарыг сайжруулах, хамгаалах, экосистемийн тэнцвэрт байдлыг хадгалахад чиглэсэн ногоон орчин бий болгон
-                    ажиллана."
+                    &ldquo;Бид байгаль орчны чанарыг сайжруулах, хамгаалах, экосистемийн тэнцвэрт байдлыг хадгалахад чиглэсэн ногоон орчин бий болгон
+                    ажиллана.&rdquo;
                   </p>
                   <p className="font-montserrat text-[16px] font-semibold text-white">NCD group</p>
                 </div>
@@ -145,9 +136,9 @@ export default function Circle() {
               <div className="w-full flex-shrink-0 px-4">
                 <div className="text-center">
                   <p className="font-montserrat text-[14px] text-white mb-4">
-                    "Шувуудын ганганааг сонсон, цэлгэр талдаа дураараа өссөн уужуу ухаант Монгол түмний эрт дээр үеэс өвлөгдөн ирсэн уламжлалт ахуй
-                    соёлыг санагдуулам, амьд байгальд ойр төлөвлөлт бүхий CASA DA VINCI хотхон нь айл бүрт хувийн эдэлбэр газар, цэлгэр саруул цонх,
-                    саруул террас зэрэг хувийн орон зайг чухалчилсан төлөвлөлтөөрөө онцлог хотхон юм."
+                    &ldquo;Шувуудын ганганааг сонсон, цэлгэр талдаа дураараа өссөн уужуу ухаант Монгол түмний эрт дээр үеэс өвлөгдөн ирсэн уламжлалт
+                    ахуй соёлыг санагдуулам, амьд байгальд ойр төлөвлөлт бүхий CASA DA VINCI хотхон нь айл бүрт хувийн эдэлбэр газар, цэлгэр саруул
+                    цонх, саруул террас зэрэг хувийн орон зайг чухалчилсан төлөвлөлтөөрөө онцлог хотхон юм.&rdquo;
                   </p>
                   <p className="font-montserrat text-[16px] font-semibold text-white">Casa Da Vinci</p>
                 </div>
@@ -157,8 +148,8 @@ export default function Circle() {
               <div className="w-full flex-shrink-0 px-4">
                 <div className="text-center">
                   <p className="font-montserrat text-[14px] text-white mb-4">
-                    "Аз жаргалын тулгын гурван чулуу, амьдрал заяаны тулах гурван багана эрүүл мэнд, амар амгалан, үнэ цэнийн оршихуйг эрхэм гэр бүлд
-                    тань зориулав."
+                    &ldquo;Аз жаргалын тулгын гурван чулуу, амьдрал заяаны тулах гурван багана эрүүл мэнд, амар амгалан, үнэ цэнийн оршихуйг эрхэм гэр
+                    бүлд тань зориулав.&rdquo;
                   </p>
                   <p className="font-montserrat text-[16px] font-semibold text-white">Хан Төгөл Хотхон</p>
                 </div>
@@ -168,8 +159,8 @@ export default function Circle() {
               <div className="w-full flex-shrink-0 px-4">
                 <div className="text-center">
                   <p className="font-montserrat text-[14px] text-white mb-4">
-                    "CENTURY 21® нь дэлхийн үл хөдлөх хөрөнгийн хамгийн том, хамгийн алдартай брэнд юм. CENTURY 21® нь 50 гаруй жилийн амжилтын түүх,
-                    мэргэжлийн туршлагатай, дэлхий нийтэд хүлээн зөвшөөрөгдсөн хүчирхэг франчайз төдийгүй хамтын ажиллагааны систем юм."
+                    &ldquo;CENTURY 21® нь дэлхийн үл хөдлөх хөрөнгийн хамгийн том, хамгийн алдартай брэнд юм. CENTURY 21® нь 50 гаруй жилийн амжилтын
+                    түүх, мэргэжлийн туршлагатай, дэлхий нийтэд хүлээн зөвшөөрөгдсөн хүчирхэг франчайз төдийгүй хамтын ажиллагааны систем юм.&rdquo;
                   </p>
                   <p className="font-montserrat text-[16px] font-semibold text-white">CENTURY 21®</p>
                 </div>
@@ -179,8 +170,8 @@ export default function Circle() {
               <div className="w-full flex-shrink-0 px-4">
                 <div className="text-center">
                   <p className="font-montserrat text-[14px] text-white mb-4">
-                    "Үл хөдлөх хөрөнгийн шилдэг компани байж, бусдад мөрөөдлөө биелүүлэх боломжийг олгосноор зорилгодоо хүрэх. БҮГД ҮР ДҮН ГАРГАЖ,
-                    БҮГД ХОЖНО."
+                    &ldquo;Үл хөдлөх хөрөнгийн шилдэг компани байж, бусдад мөрөөдлөө биелүүлэх боломжийг олгосноор зорилгодоо хүрэх. БҮГД ҮР ДҮН
+                    ГАРГАЖ, БҮГД ХОЖНО.&rdquo;
                   </p>
                   <p className="font-montserrat text-[16px] font-semibold text-white">REMAX</p>
                 </div>
@@ -190,8 +181,8 @@ export default function Circle() {
               <div className="w-full flex-shrink-0 px-4">
                 <div className="text-center">
                   <p className="font-montserrat text-[14px] text-white mb-4">
-                    "Нэр төр, үнэ цэнийн илэрхийлэл "Gerlug Vista" хотхон нь айл гэрийн эрүүл аюулгүй, тааламжит орчинг бүрдүүлсэн шинэлэг
-                    архитектурын цогц төлөвлөлт, олон улсын стандартын дагуу сүндэрлэж байна."
+                    &ldquo;Нэр төр, үнэ цэнийн илэрхийлэл &ldquo;Gerlug Vista&rdquo; хотхон нь айл гэрийн эрүүл аюулгүй, тааламжит орчинг бүрдүүлсэн
+                    шинэлэг архитектурын цогц төлөвлөлт, олон улсын стандартын дагуу сүндэрлэж байна.&rdquo;
                   </p>
                   <p className="font-montserrat text-[16px] font-semibold text-white">Gerlug Vista</p>
                 </div>
@@ -201,8 +192,8 @@ export default function Circle() {
               <div className="w-full flex-shrink-0 px-4">
                 <div className="text-center">
                   <p className="font-montserrat text-[14px] text-white mb-4">
-                    "Нийгэмдээ эерэг өөрчлөлтийг бий болгох хүсэл тэмүүлэлтэй, ижил үнэт зүйл, хүсэл тэмүүлэлтэй хүмүүс манай хотхонд нэгдэн цуглаж
-                    гэр бүлийн дотно найз нөхөд болно."
+                    &ldquo;Нийгэмдээ эерэг өөрчлөлтийг бий болгох хүсэл тэмүүлэлтэй, ижил үнэт зүйл, хүсэл тэмүүлэлтэй хүмүүс манай хотхонд нэгдэн
+                    цуглаж гэр бүлийн дотно найз нөхөд болно.&rdquo;
                   </p>
                   <p className="font-montserrat text-[16px] font-semibold text-white">Lap Land Villa</p>
                 </div>
