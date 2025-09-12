@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
 import Link from "next/link";
+import { useLanguage } from "@/contexts/LanguageContext";
 export default function Circle() {
+  const { isEnglish } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = 7;
 
@@ -32,11 +33,19 @@ export default function Circle() {
 
   return (
     <div className="flex justify-center items-center flex-col w-[100vw] bg-[#181414]">
-      <div className="flex justify-center items-center flex-col max-w-[1160px]">
-        <div className="flex font-montserrat mt-[160px] text-[61.425px] font-bold text-white uppercase">Хүрээлэл</div>
+      <div className="flex justify-center items-center flex-col gap-[100px] max-w-[1160px]">
+        <div className="flex font-montserrat mt-[100px] text-[61.425px] font-bold text-white uppercase">{isEnglish ? "Circle" : "Хүрээлэл"}</div>
         <div className="flex font-montserrat mt-[40px] mb-[40px] text-[36px] line-height-[48px] text-white text-center">
           <h2>
-            Ашид өвлөгдөх үнэт хөрөнгө, үнэ цэн <br /> бүрийг хамт бүтээх хамтын ажиллагааны <br /> хүрээлэл
+            {isEnglish ? (
+              <>
+                A circle of cooperation to create <br /> valuable assets and values <br /> for future generations
+              </>
+            ) : (
+              <>
+                Ашид өвлөгдөх үнэт хөрөнгө, үнэ цэн <br /> бүрийг хамт бүтээх хамтын ажиллагааны <br /> хүрээлэл
+              </>
+            )}
           </h2>
         </div>
         <div className="">
@@ -234,7 +243,9 @@ export default function Circle() {
           </div>
         </div>
         <Link href="/contact">
-          <div className="flex font-montserrat mt-[100px] mb-[40px] text-[61.425px] text-white text-center">Менежерүүд</div>
+          <div className="flex font-montserrat mt-[100px] mb-[40px] text-[61.425px] text-white text-center">
+            {isEnglish ? "Managers" : "Менежерүүд"}
+          </div>
         </Link>
       </div>
     </div>

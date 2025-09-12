@@ -1,10 +1,14 @@
-import Image from "next/image";
+"use client";
 
-export default function contact() {
+import Image from "next/image";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+export default function Contact() {
+  const { isEnglish } = useLanguage();
   return (
     <div className="flex  items-center flex-col w-[100vw] bg-[#181414] min-h-[100vh]">
       <div className="flex justify-center items-center flex-col max-w-[1160px]">
-        <div className="flex font-montserrat mt-[160px] text-[61.425px] font-bold text-white uppercase ">МЕНЕЖЕР</div>
+        <div className="flex font-montserrat mt-[160px] text-[61.425px] font-bold text-white uppercase">{isEnglish ? "MANAGER" : "МЕНЕЖЕР"}</div>
 
         <div className="flex flex-wrap justify-between text-white pt-[109px] gap-[32px]">
           <div className="">
@@ -12,14 +16,14 @@ export default function contact() {
           </div>
           <div className="flex justify-center items-center flex-col line-height-[40px] leading-[40px]">
             <p className="font-montserrat text-[30px] mb-[10px]">8074-8855</p>
-            <p className="font-montserrat text-[14px] mb-[15px]">Утас</p>
+            <p className="font-montserrat text-[14px] mb-[15px]">{isEnglish ? "Phone" : "Утас"}</p>
             <p className="font-montserrat text-[30px] mb-[28px]">mungunzul.n@xacleasing.mn</p>
-            <p className="font-montserrat text-[14px] mb-[15px]">Цахим шуудан</p>
+            <p className="font-montserrat text-[14px] mb-[15px]">{isEnglish ? "Email" : "Цахим шуудан"}</p>
           </div>
         </div>
       </div>
       <div className="w-full h-full flex flex-col items-center py-[100px] text-white">
-        <p className="text-center text-[36px]">Хүсэлт илгээх</p>
+        <p className="text-center text-[36px]">{isEnglish ? "Send Request" : "Хүсэлт илгээх"}</p>
         <div className="flex justify-center flex-col  pt-[10px] font-poppins, sans-serif">
           <div className="flex gap-[100px]">
             <input className="border-b-2 outline-none focus:border-indigo-600 w-[370px] h-[60px] mb-[40px]" placeholder="Овог нэр" type="text" />
