@@ -2,43 +2,173 @@
 
 import Image from "next/image";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { motion, useInView, Variants } from "framer-motion";
+import { useRef } from "react";
+
+const fadeInVariants: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut",
+    },
+  },
+};
 
 export default function Contact() {
   const { isEnglish } = useLanguage();
-  return (
-    <div className="flex  items-center flex-col w-[100vw] bg-[#181414] min-h-[100vh]">
-      <div className="flex justify-center items-center flex-col max-w-[1160px]">
-        <div className="flex font-montserrat mt-[160px] text-[61.425px] font-bold text-white uppercase">{isEnglish ? "MANAGER" : "МЕНЕЖЕР"}</div>
 
-        <div className="flex flex-wrap justify-between text-white pt-[109px] gap-[32px]">
-          <div className="">
-            <Image src="/mungunzul.png" alt="logo" width={386} height={420} />
+  // Refs for each section
+  const titleRef = useRef(null);
+  const managerRef = useRef(null);
+  const formRef = useRef(null);
+  const infoRef = useRef(null);
+
+  // Check if sections are in view
+  const isTitleInView = useInView(titleRef, { once: true, amount: 0.2 });
+  const isManagerInView = useInView(managerRef, { once: true, amount: 0.1 });
+  const isFormInView = useInView(formRef, { once: true, amount: 0.1 });
+  const isInfoInView = useInView(infoRef, { once: true, amount: 0.1 });
+
+  return (
+    <div className="flex items-center flex-col pt-[200px] w-full bg-[#181414] min-h-screen px-4">
+      <div className="w-[80vw] max-w-[1160px] mx-auto">
+        {/* Title Section */}
+        <motion.div
+          ref={titleRef}
+          initial="hidden"
+          animate={isTitleInView ? "visible" : "hidden"}
+          variants={fadeInVariants}
+          className="flex justify-center items-center mb-16"
+        >
+          <div
+            className="flex font-montserrat  text-[45px] lg:text-[3.5vw] font-bold text-white uppercase"
+            style={{
+              fontFamily: "Montserrat",
+              verticalAlign: "top",
+              margin: "0 auto",
+              marginBottom: "0px",
+              width: "auto",
+            }}
+          >
+            {isEnglish ? "MANAGER" : "МЕНЕЖЕР"}
           </div>
-          <div className="flex justify-center items-center flex-col line-height-[40px] leading-[40px]">
-            <p className="font-montserrat text-[30px] mb-[10px]">8074-8855</p>
-            <p className="font-montserrat text-[14px] mb-[15px]">{isEnglish ? "Phone" : "Утас"}</p>
-            <p className="font-montserrat text-[30px] mb-[28px]">mungunzul.n@xacleasing.mn</p>
-            <p className="font-montserrat text-[14px] mb-[15px]">{isEnglish ? "Email" : "Цахим шуудан"}</p>
+        </motion.div>
+
+        {/* Manager Section */}
+        <motion.div
+          ref={managerRef}
+          initial="hidden"
+          animate={isManagerInView ? "visible" : "hidden"}
+          variants={fadeInVariants}
+          className="flex flex-col lg:flex-row justify-center items-center text-white pt-[60px] md:pt-[40px] gap-8 lg:gap-[32px] mb-24"
+        >
+          <div className="flex-shrink-0">
+            <Image
+              src="/mungunzul.png"
+              alt="manager"
+              width={406}
+              height={420}
+              className="w-[90vw] md:max-w-[350px] lg:max-w-[406px] h-auto rounded-lg shadow-xl"
+            />
           </div>
-        </div>
-      </div>
-      <div className="w-full h-full flex flex-col items-center py-[100px] text-white">
-        <p className="text-center text-[36px]">{isEnglish ? "Send Request" : "Хүсэлт илгээх"}</p>
-        <div className="flex justify-center flex-col  pt-[10px] font-poppins, sans-serif">
-          <div className="flex gap-[100px]">
-            <input className="border-b-2 outline-none focus:border-indigo-600 w-[370px] h-[60px] mb-[40px]" placeholder="Овог нэр" type="text" />
-            <input className="border-b-2 outline-none focus:border-indigo-600 w-[370px] h-[60px] mb-[20px]" placeholder="Регистр" type="text" />
+          <div className="flex justify-center items-center flex-col text-center lg:text-left">
+            <p className="font-montserrat text-white/70 text-[24px] md:text-[30px] mb-[10px]">8074-8855</p>
+            <p className="font-montserrat text-white/70 text-[16px] md:text-[18px] mb-[15px]">{isEnglish ? "Phone" : "Утас"}</p>
+            <p className="font-montserrat text-white/70 text-[20px] md:text-[24px] lg:text-[30px] mb-[28px] break-all">mungunzul.n@xacleasing.mn</p>
+            <p className="font-montserrat text-white/70 text-[16px] md:text-[18px] mb-[15px]">{isEnglish ? "Email" : "Цахим шуудан"}</p>
           </div>
-          <div className="flex gap-[100px]">
-            <input className="border-b-2 outline-none focus:border-indigo-600 w-[370px] h-[60px] mb-[20px]" placeholder="Утас" type="text" />
-            <input className="border-b-2 outline-none focus:border-indigo-600 w-[370px] h-[60px] mb-[20px]" placeholder="Цахим шуудан" type="text" />
+        </motion.div>
+
+        {/* Contact Form Section */}
+        <motion.div
+          ref={formRef}
+          initial="hidden"
+          animate={isFormInView ? "visible" : "hidden"}
+          variants={fadeInVariants}
+          className="w-full flex flex-col items-center py-[40px] md:py-[80px] text-white"
+        >
+          <p className="text-center text-[24px] md:text-[36px] mb-12 font-medium">{isEnglish ? "Send Request" : "Хүсэлт илгээх"}</p>
+
+          <div className="w-full max-w-[780px] mx-auto">
+            <form className="flex flex-col gap-[40px]">
+              {/* First Row - Name and Register */}
+              <div className="flex flex-col md:flex-row gap-[40px]">
+                <input
+                  className="flex-1 bg-transparent border-0 border-b-2 border-white/30 outline-none 
+             h-[60px] text-white placeholder-white/50 px-0
+             focus:border-transparent focus:bg-gradient-to-r focus:from-white focus:to-white/90
+             focus:[background-position:0_100%] focus:[background-size:100%_2px] 
+             [background-size:0_2px] [background-position:0_100%] bg-no-repeat 
+             transition-all duration-500 ease-out"
+                  placeholder="Овог нэр"
+                  type="text"
+                />
+                <input
+                  className="flex-1 bg-transparent border-0 border-b-2 border-white/30 outline-none 
+             h-[60px] text-white placeholder-white/50 px-0
+             focus:border-transparent focus:bg-gradient-to-r focus:from-white focus:to-white/90
+             focus:[background-position:0_100%] focus:[background-size:100%_2px] 
+             [background-size:0_2px] [background-position:0_100%] bg-no-repeat 
+             transition-all duration-500 ease-out"
+                  placeholder="Регистр"
+                  type="text"
+                />
+              </div>
+
+              {/* Second Row - Phone and Email */}
+              <div className="flex flex-col md:flex-row gap-[40px]">
+                <input
+                  className="flex-1 bg-transparent border-0 border-b-2 border-white/30 outline-none 
+             h-[60px] text-white placeholder-white/50 px-0
+             focus:border-transparent focus:bg-gradient-to-r focus:from-white focus:to-white/90
+             focus:[background-position:0_100%] focus:[background-size:100%_2px] 
+             [background-size:0_2px] [background-position:0_100%] bg-no-repeat 
+             transition-all duration-500 ease-out"
+                  placeholder="Утас"
+                  type="text"
+                />
+                <input
+                  className="flex-1 bg-transparent border-0 border-b-2 border-white/30 outline-none 
+             h-[60px] text-white placeholder-white/50 px-0
+             focus:border-transparent focus:bg-gradient-to-r focus:from-white focus:to-white/90
+             focus:[background-position:0_100%] focus:[background-size:100%_2px] 
+             [background-size:0_2px] [background-position:0_100%] bg-no-repeat 
+             transition-all duration-500 ease-out"
+                  placeholder="Цахим шуудан"
+                  type="email"
+                />
+              </div>
+
+              {/* Message Field */}
+              <textarea
+                className="flex-1 bg-transparent border-0 border-b-2 border-white/30 outline-none 
+             h-[60px] text-white placeholder-white/50 px-0
+             focus:border-transparent focus:bg-gradient-to-r focus:from-white focus:to-white/90
+             focus:[background-position:0_100%] focus:[background-size:100%_2px] 
+             [background-size:0_2px] [background-position:0_100%] bg-no-repeat 
+             transition-all duration-500 ease-out"
+                placeholder="Таны хүсэлт"
+              />
+
+              {/* Submit Button */}
+              <div className="flex justify-start">
+                <button
+                  type="submit"
+                  className="border-2 border-white text-white py-[12px] px-[40px] md:px-[50px] rounded-[50px] text-[14px] hover:bg-white hover:text-black transition-colors duration-300"
+                >
+                  Илгээх
+                </button>
+              </div>
+            </form>
           </div>
-          <input className="border-b-2 outline-none focus:border-indigo-600 w-[840px] h-[60px] mb-[60px]" placeholder="Таны хүсэлт" type="text" />
-          <button className="flex border-1 text-white py-[10px] px-[50px] rounded-[50px] text-[14px]">Илгээх</button>
-        </div>
-        <div className="w-full max-w-6xl mx-auto px-4 mt-16">
-          {/* Contact Information Footer */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-16 border-t border-gray-700">
+        </motion.div>
+
+        {/* Contact Information Footer */}
+        <motion.div ref={infoRef} initial="hidden" animate={isInfoInView ? "visible" : "hidden"} variants={fadeInVariants} className="w-full pt-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 md:pt-16">
             {/* Email */}
             <div className="text-center">
               <div className="flex justify-center mb-4">
@@ -52,7 +182,7 @@ export default function Contact() {
                 </svg>
               </div>
               <p className="text-white font-montserrat text-sm mb-2">Цахим шуудан</p>
-              <p className="text-white font-montserrat">info@xacleasing.mn</p>
+              <p className="text-white font-montserrat text-sm md:text-base">info@xacleasing.mn</p>
             </div>
 
             {/* Address */}
@@ -91,13 +221,13 @@ export default function Contact() {
                 </svg>
               </div>
               <p className="text-white font-montserrat text-sm mb-2">Утас</p>
-              <p className="text-white font-montserrat">(976) 7011-2067</p>
+              <p className="text-white font-montserrat text-sm md:text-base">(976) 7011-2067</p>
             </div>
           </div>
 
           {/* Bottom Bar */}
-          <div className="flex justify-between items-center pt-8 border-t border-gray-700 mt-8">
-            <div className="text-white font-montserrat text-sm">#шинийг #шуурхай</div>
+          <div className="flex flex-col md:flex-row justify-between items-center pt-8 mt-8 gap-4 pb-8">
+            <div className="text-white font-montserrat text-sm text-center md:text-left">#шинийг #шуурхай</div>
             <div className="flex items-center gap-2 text-white font-montserrat text-sm">
               <span>Social</span>
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -110,7 +240,7 @@ export default function Contact() {
               </svg>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
