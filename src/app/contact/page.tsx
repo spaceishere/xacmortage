@@ -35,15 +35,28 @@ export default function Contact() {
   const titleRef = useRef(null);
   const managerRef = useRef(null);
   const formRef = useRef(null);
+  const formElementRef = useRef<HTMLFormElement>(null);
 
   const isTitleInView = useInView(titleRef, { once: true, amount: 0.2 });
   const isManagerInView = useInView(managerRef, { once: true, amount: 0.1 });
   const isFormInView = useInView(formRef, { once: true, amount: 0.1 });
 
   const [saveLead, { loading }] = useMutation(WIDGETS_SAVE_LEAD);
+  const [toast, setToast] = useState<{ show: boolean; type: "success" | "error"; message: string }>({
+    show: false,
+    type: "success",
+    message: "",
+  });
+
+  const showToast = (type: "success" | "error", message: string) => {
+    setToast({ show: true, type, message });
+    setTimeout(() => {
+      setToast({ show: false, type, message: "" });
+    }, 4000);
+  };
 
   const openNotificationWithIcon = (type: "success" | "error", message: string) => {
-    (notification as any)[type]({
+    (notification as unknown as Record<string, (config: { message: string; placement: string }) => void>)[type]({
       message,
       placement: "topRight",
     });
@@ -52,7 +65,9 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
+    if (!formElementRef.current) return;
+
+    const formData = new FormData(formElementRef.current);
     const values = {
       name: formData.get("name") as string,
       register: formData.get("register") as string,
@@ -66,11 +81,11 @@ export default function Contact() {
     }
 
     const submissions = [
-      { _id: "nL-7wT3jNM5XTa-r6PylY", type: "input", value: values.name },
-      { _id: "nL-7wT3jNM5XTa-r6PylY", type: "input", value: values.register || "" },
-      { _id: "nL-7wT3jNM5XTa-r6PylY", type: "input", value: values.mobile || "" },
-      { _id: "nL-7wT3jNM5XTa-r6PylY", type: "input", value: values.email || "" },
-      { _id: "nL-7wT3jNM5XTa-r6PylY", type: "textarea", value: values.message },
+      { _id: "field-name", type: "input", value: values.name },
+      { _id: "field-register", type: "input", value: values.register || "" },
+      { _id: "field-mobile", type: "input", value: values.mobile || "" },
+      { _id: "field-email", type: "input", value: values.email || "" },
+      { _id: "field-message", type: "textarea", value: values.message },
     ];
 
     const browserInfo = {
@@ -81,6 +96,13 @@ export default function Contact() {
     };
 
     try {
+      console.log("Sending form data:", {
+        formId: "nL-7wT3jNM5XTa-r6PylY",
+        submissions,
+        browserInfo,
+        cachedCustomerId: "5uoY53QC9Pwmrsq2W",
+      });
+
       const { data } = await saveLead({
         variables: {
           formId: "nL-7wT3jNM5XTa-r6PylY",
@@ -90,21 +112,39 @@ export default function Contact() {
         },
       });
 
+      console.log("Response data:", data);
+
       if (data && typeof data === "object" && "widgetsSaveLead" in data) {
-        const result = (data as any).widgetsSaveLead;
+        const result = (data as Record<string, unknown>).widgetsSaveLead as Record<string, unknown>;
+        console.log("Mutation result:", result);
+
         if (result.status === "ok") {
+          // Show success toast
+          showToast("success", isEnglish ? "Request sent successfully!" : "Амжилттай илгээлээ!");
           openNotificationWithIcon("success", isEnglish ? "Request sent successfully" : "Амжилттай илгээлээ");
-          e.currentTarget.reset();
+          if (formElementRef.current) {
+            formElementRef.current.reset();
+          }
         } else {
-          const errors = result.errors;
+          const errors = result.errors as Array<{ text: string }> | undefined;
+          console.log("Mutation errors:", errors);
+          // Show error toast
+          const errorMessage = errors && errors.length > 0 ? errors[0].text : isEnglish ? "Failed to send" : "Амжилтгүй боллоо";
+          showToast("error", `${isEnglish ? "Error" : "Алдаа"}: ${errorMessage}`);
           openNotificationWithIcon(
             "error",
             errors && errors.length > 0 ? `${isEnglish ? "Error" : "Алдаа"}: ${errors[0].text}` : isEnglish ? "Failed to send" : "Амжилтгүй боллоо"
           );
         }
+      } else {
+        console.log("Unexpected response format:", data);
+        showToast("error", isEnglish ? "Unexpected response format" : "Хүлээгдээгүй хариу");
+        openNotificationWithIcon("error", isEnglish ? "Unexpected response format" : "Хүлээгдээгүй хариу");
       }
     } catch (error) {
       console.error("GraphQL mutation error:", error);
+      // Show error toast for network issues
+      showToast("error", isEnglish ? "Failed to send request. Please try again." : "Амжилтгүй боллоо. Дахин оролдоно уу.");
       openNotificationWithIcon("error", isEnglish ? "Failed to send request" : "Амжилтгүй боллоо");
     }
   };
@@ -159,7 +199,7 @@ export default function Contact() {
           <p className="text-center text-[24px] md:text-[36px] mb-12 font-medium">{isEnglish ? "Send Request" : "Хүсэлт илгээх"}</p>
 
           <div className="w-full max-w-[780px] mx-auto">
-            <form onSubmit={handleSubmit} className="flex flex-col gap-[40px]">
+            <form ref={formElementRef} onSubmit={handleSubmit} className="flex flex-col gap-[40px]">
               {/* First Row - Name and Register */}
               <div className="flex flex-col md:flex-row gap-[40px]">
                 <input
@@ -240,6 +280,43 @@ export default function Contact() {
           </div>
         </motion.div>
       </div>
+
+      {/* Custom Toast Notification */}
+      {toast.show && (
+        <motion.div
+          initial={{ opacity: 0, y: 50, scale: 0.3 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 50, scale: 0.3 }}
+          className={`fixed bottom-8 right-8 z-50 px-6 py-4 rounded-lg shadow-lg max-w-sm ${
+            toast.type === "success" ? "bg-green-500 text-white" : "bg-red-500 text-white"
+          }`}
+        >
+          <div className="flex items-center gap-3">
+            <div className="flex-shrink-0">
+              {toast.type === "success" ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              )}
+            </div>
+            <div className="flex-1">
+              <p className="text-sm font-medium">{toast.message}</p>
+            </div>
+            <button
+              onClick={() => setToast({ show: false, type: "success", message: "" })}
+              className="flex-shrink-0 ml-2 text-white/70 hover:text-white"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 }

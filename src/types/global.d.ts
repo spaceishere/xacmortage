@@ -2,8 +2,8 @@ declare module "antd" {
   import { ReactNode } from "react";
 
   export interface FormProps {
-    form?: any;
-    onFinish?: (values: any) => void | Promise<void>;
+    form?: unknown;
+    onFinish?: (values: Record<string, unknown>) => void | Promise<void>;
     layout?: "horizontal" | "vertical" | "inline";
     className?: string;
     children?: ReactNode;
@@ -11,8 +11,8 @@ declare module "antd" {
 
   export interface FormItemProps {
     name?: string;
-    rules?: any[];
-    initialValue?: any;
+    rules?: Array<Record<string, unknown>>;
+    initialValue?: unknown;
     children?: ReactNode;
   }
 
@@ -46,7 +46,7 @@ declare module "antd" {
       description?: ReactNode;
       btn?: ReactNode;
       key?: string;
-      onClose?: Function;
+      onClose?: () => void;
       duration?: number;
     }) => void;
     error: (config: {
@@ -55,7 +55,7 @@ declare module "antd" {
       description?: ReactNode;
       btn?: ReactNode;
       key?: string;
-      onClose?: Function;
+      onClose?: () => void;
       duration?: number;
     }) => void;
   }
@@ -63,7 +63,7 @@ declare module "antd" {
   export const Form: {
     (props: FormProps): JSX.Element;
     Item: (props: FormItemProps) => JSX.Element;
-    useForm: () => [any];
+    useForm: () => [unknown];
   };
 
   export const Input: {
