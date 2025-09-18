@@ -55,7 +55,7 @@ export default function Header() {
                   <span className="block transition-all duration-300 group-hover:opacity-0 group-hover:-translate-y-1">
                     {isEnglish ? item.en : item.mn}
                   </span>
-                  <span className="block absolute left-5 w-full transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:translate-y-[-24px]">
+                  <span className="block absolute left-0 w-full transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:translate-y-[-24px]">
                     {isEnglish ? item.en : item.mn}
                   </span>
                 </p>
