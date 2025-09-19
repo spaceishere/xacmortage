@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -115,7 +115,7 @@ export default function Value() {
         <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="w-full">
           <Link href="/circle" className="block">
             <motion.div
-              className="flex font-montserrat mt-[100px] font-light mb-[40px] text-[3.5vw] spacex-x-[90px] text-white text-center justify-center"
+              className="flex font-montserrat mt-[100px] font-light mb-[40px] text-[45px] lg:text-[3.5vw] spacex-x-[90px] text-white text-center justify-center"
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
               {isEnglish ? "Partnership" : "Түншлэл"}

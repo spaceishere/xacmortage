@@ -122,8 +122,8 @@ export default function Header() {
       </div>
 
       {/* Mobile menu */}
-      <div className={`md:hidden mobile-menu transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? "max-h-screen" : "max-h-0"}`}>
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/90 backdrop-blur-sm">
+      <div className={`md:hidden mobile-menu transition-all  duration-300 ease-in-out overflow-hidden ${isOpen ? "max-h-screen" : "max-h-0"}`}>
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px- min-h-screen bg-black/90  backdrop-blur-sm">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} onClick={() => setIsOpen(false)}>
               <div className="block px-3 py-4 text-white hover:bg-gray-800/50 rounded-md transition-colors">{isEnglish ? item.en : item.mn}</div>

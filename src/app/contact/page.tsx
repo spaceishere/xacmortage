@@ -150,17 +150,19 @@ export default function Contact() {
   };
 
   return (
-    <div className="flex flex-col items-center pt-[200px] w-full bg-[#181414] min-h-screen px-4">
-      <div className="w-[80vw] max-w-[1160px] mx-auto">
+    <div className="flex flex-col items-center pt-32 sm:pt-40 md:pt-48 lg:pt-56 w-full bg-[#181414] min-h-screen px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto">
         {/* Title */}
         <motion.div
           ref={titleRef}
           initial="hidden"
           animate={isTitleInView ? "visible" : "hidden"}
           variants={fadeInVariants}
-          className="flex justify-center items-center mb-16"
+          className="flex justify-center items-center mb-12 sm:mb-16"
         >
-          <div className="flex font-montserrat text-[45px] lg:text-[3.5vw] font-bold text-white uppercase">{isEnglish ? "MANAGER" : "МЕНЕЖЕР"}</div>
+          <div className="font-montserrat text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white uppercase text-center">
+            {isEnglish ? "MANAGER" : "МЕНЕЖЕР"}
+          </div>
         </motion.div>
 
         {/* Manager */}
@@ -169,22 +171,16 @@ export default function Contact() {
           initial="hidden"
           animate={isManagerInView ? "visible" : "hidden"}
           variants={fadeInVariants}
-          className="flex flex-col lg:flex-row justify-center items-center text-white pt-[60px] md:pt-[40px] gap-8 lg:gap-[32px] mb-24"
+          className="flex flex-col lg:flex-row justify-center items-center text-white pt-12 sm:pt-16 md:pt-20 gap-6 sm:gap-8 lg:gap-12 mb-16 sm:mb-20 md:mb-24"
         >
           <div className="flex-shrink-0">
-            <Image
-              src="/mungunzul.png"
-              alt="manager"
-              width={406}
-              height={420}
-              className="w-[90vw] md:max-w-[350px] lg:max-w-[406px] h-auto rounded-lg shadow-xl"
-            />
+            <Image src="/mungunzul.png" alt="manager" width={406} height={420} className="w-64 sm:w-72 md:w-80 lg:w-96 h-auto rounded-lg shadow-xl" />
           </div>
-          <div className="flex flex-col text-center lg:text-left items-center lg:items-start">
-            <p className="font-montserrat text-white/70 text-[24px] md:text-[30px] mb-[10px]">8074-8855</p>
-            <p className="font-montserrat text-white/70 text-[16px] md:text-[18px] mb-[15px]">{isEnglish ? "Phone" : "Утас"}</p>
-            <p className="font-montserrat text-white/70 text-[20px] md:text-[24px] lg:text-[30px] mb-[28px] break-all">mungunzul.n@xacleasing.mn</p>
-            <p className="font-montserrat text-white/70 text-[16px] md:text-[18px] mb-[15px]">{isEnglish ? "Email" : "Цахим шуудан"}</p>
+          <div className="flex flex-col text-center lg:text-left items-center lg:items-start space-y-2 sm:space-y-3">
+            <p className="font-montserrat text-white/70 text-xl sm:text-2xl md:text-3xl font-semibold">8074-8855</p>
+            <p className="font-montserrat text-white/70 text-sm sm:text-base md:text-lg">{isEnglish ? "Phone" : "Утас"}</p>
+            <p className="font-montserrat text-white/70 text-lg sm:text-xl md:text-2xl lg:text-3xl break-all">mungunzul.n@xacleasing.mn</p>
+            <p className="font-montserrat text-white/70 text-sm sm:text-base md:text-lg">{isEnglish ? "Email" : "Цахим шуудан"}</p>
           </div>
         </motion.div>
 
@@ -196,17 +192,19 @@ export default function Contact() {
           variants={fadeInVariants}
           className="w-full flex flex-col items-center py-[40px] md:py-[80px] text-white"
         >
-          <p className="text-center text-[24px] md:text-[36px] mb-12 font-medium">{isEnglish ? "Send Request" : "Хүсэлт илгээх"}</p>
+          <p className="text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-8 sm:mb-10 md:mb-12 font-medium">
+            {isEnglish ? "Send Request" : "Хүсэлт илгээх"}
+          </p>
 
-          <div className="w-full max-w-[780px] mx-auto">
-            <form ref={formElementRef} onSubmit={handleSubmit} className="flex flex-col gap-[40px]">
+          <div className="w-full max-w-[780px] mx-auto px-4 sm:px-6 lg:px-0">
+            <form ref={formElementRef} onSubmit={handleSubmit} className="flex flex-col gap-6 sm:gap-8 md:gap-10">
               {/* First Row - Name and Register */}
-              <div className="flex flex-col md:flex-row gap-[40px]">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8">
                 <input
                   name="name"
                   required
                   className="flex-1 bg-transparent border-0 border-b-2 border-white/30 outline-none 
-             h-[60px] text-white placeholder-white/50 px-0
+             h-12 sm:h-14 md:h-16 text-white placeholder-white/50 px-0 text-sm sm:text-base
              focus:border-transparent focus:bg-gradient-to-r focus:from-white focus:to-white/90
              focus:[background-position:0_100%] focus:[background-size:100%_2px] 
              [background-size:0_2px] [background-position:0_100%] bg-no-repeat 
@@ -217,7 +215,7 @@ export default function Contact() {
                 <input
                   name="register"
                   className="flex-1 bg-transparent border-0 border-b-2 border-white/30 outline-none 
-             h-[60px] text-white placeholder-white/50 px-0
+             h-12 sm:h-14 md:h-16 text-white placeholder-white/50 px-0 text-sm sm:text-base
              focus:border-transparent focus:bg-gradient-to-r focus:from-white focus:to-white/90
              focus:[background-position:0_100%] focus:[background-size:100%_2px] 
              [background-size:0_2px] [background-position:0_100%] bg-no-repeat 
@@ -228,11 +226,11 @@ export default function Contact() {
               </div>
 
               {/* Second Row - Phone and Email */}
-              <div className="flex flex-col md:flex-row gap-[40px]">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8">
                 <input
                   name="mobile"
                   className="flex-1 bg-transparent border-0 border-b-2 border-white/30 outline-none 
-             h-[60px] text-white placeholder-white/50 px-0
+             h-12 sm:h-14 md:h-16 text-white placeholder-white/50 px-0 text-sm sm:text-base
              focus:border-transparent focus:bg-gradient-to-r focus:from-white focus:to-white/90
              focus:[background-position:0_100%] focus:[background-size:100%_2px] 
              [background-size:0_2px] [background-position:0_100%] bg-no-repeat 
@@ -243,7 +241,7 @@ export default function Contact() {
                 <input
                   name="email"
                   className="flex-1 bg-transparent border-0 border-b-2 border-white/30 outline-none 
-             h-[60px] text-white placeholder-white/50 px-0
+             h-12 sm:h-14 md:h-16 text-white placeholder-white/50 px-0 text-sm sm:text-base
              focus:border-transparent focus:bg-gradient-to-r focus:from-white focus:to-white/90
              focus:[background-position:0_100%] focus:[background-size:100%_2px] 
              [background-size:0_2px] [background-position:0_100%] bg-no-repeat 
@@ -257,8 +255,8 @@ export default function Contact() {
               <textarea
                 name="message"
                 required
-                className="flex-1 bg-transparent border-0 border-b-2 border-white/30 outline-none 
-             h-[120px] text-white placeholder-white/50 px-0 resize-none
+                className="w-full bg-transparent border-0 border-b-2 border-white/30 outline-none 
+             h-24 sm:h-28 md:h-32 text-white placeholder-white/50 px-0 resize-none text-sm sm:text-base
              focus:border-transparent focus:bg-gradient-to-r focus:from-white focus:to-white/90
              focus:[background-position:0_100%] focus:[background-size:100%_2px] 
              [background-size:0_2px] [background-position:0_100%] bg-no-repeat 
@@ -271,7 +269,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="border-2 border-white text-white py-[12px] px-[40px] md:px-[50px] rounded-[50px] text-[14px] hover:bg-white hover:text-black transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="border-2 border-white text-white py-3 px-6 sm:py-3 sm:px-8 md:py-4 md:px-10 rounded-full text-sm sm:text-base font-medium hover:bg-white hover:text-black transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed min-w-[120px]"
                 >
                   {loading ? (isEnglish ? "Sending..." : "Илгээж байна...") : isEnglish ? "Send" : "Илгээх"}
                 </button>
@@ -287,7 +285,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 50, scale: 0.3 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 50, scale: 0.3 }}
-          className={`fixed bottom-8 right-8 z-50 px-6 py-4 rounded-lg shadow-lg max-w-sm ${
+          className={`fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50 px-4 py-3 sm:px-6 sm:py-4 rounded-lg shadow-lg max-w-xs sm:max-w-sm ${
             toast.type === "success" ? "bg-green-500 text-white" : "bg-red-500 text-white"
           }`}
         >

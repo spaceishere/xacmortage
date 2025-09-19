@@ -28,7 +28,7 @@ const HeroSection = () => {
     }, 4000);
 
     return () => clearInterval(slideInterval);
-  }, []);
+  }, [backgrounds.length]);
 
   // Text cycling effect
   useEffect(() => {
@@ -37,7 +37,7 @@ const HeroSection = () => {
     }, 3000);
 
     return () => clearInterval(textInterval);
-  }, []);
+  }, [texts.length]);
 
   // Scroll effect
   useEffect(() => {

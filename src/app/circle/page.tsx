@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
@@ -97,17 +97,16 @@ export default function Circle() {
   const [direction, setDirection] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const titleRef = useRef(null);
-  const subtitleRef = useRef(null);
-  const gridRef = useRef(null);
-  const carouselRef = useRef(null);
   const managersRef = useRef(null);
 
-  const isTitleInView = useInView(titleRef, { once: true, amount: 0.2 });
-  const isSubtitleInView = useInView(subtitleRef, { once: true, amount: 0.2 });
-  const isGridInView = useInView(gridRef, { once: true, amount: 0.1 });
-  const isCarouselInView = useInView(carouselRef, { once: true, amount: 0.2 });
   const isManagersInView = useInView(managersRef, { once: true, amount: 0.2 });
+
+  const nextSlide = useCallback(() => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setDirection(1);
+    setCurrentSlide((prev) => (prev + 1) % totalSlides);
+  }, [isAnimating, totalSlides]);
 
   useEffect(() => {
     if (!isAnimating) {
@@ -116,20 +115,7 @@ export default function Circle() {
       }, 5000);
       return () => clearTimeout(timer);
     }
-  }, [currentSlide, isAnimating]);
-
-  const handleDotClick = (index: number) => {
-    if (isAnimating) return;
-    setDirection(index > currentSlide ? 1 : -1);
-    setCurrentSlide(index);
-  };
-
-  const nextSlide = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setDirection(1);
-    setCurrentSlide((prev) => (prev + 1) % totalSlides);
-  };
+  }, [currentSlide, isAnimating, nextSlide]);
 
   const prevSlide = () => {
     if (isAnimating) return;
@@ -139,7 +125,7 @@ export default function Circle() {
   };
 
   return (
-    <div className="flex justify-center items-center pt-[200px] flex-col w-[100vw] bg-[#181414]">
+    <div className="flex justify-center items-center pt-[200px] flex-col w-full min-h-screen bg-[#181414] overflow-x-hidden">
       <motion.div
         className="flex justify-center items-center flex-col gap-[100px] max-w-[1160px]"
         initial="hidden"
@@ -147,9 +133,7 @@ export default function Circle() {
         variants={containerVariants}
       >
         <motion.div
-          ref={titleRef}
-          variants={fadeInVariants}
-          className="flex font-montserrat text-[3.5vw] font-bold text-white uppercase"
+          className="flex font-montserrat  text-[45px] lg:text-[3.5vw] font-bold text-white uppercase"
           style={{
             fontFamily: "Montserrat",
             verticalAlign: "top",
@@ -157,30 +141,28 @@ export default function Circle() {
             marginBottom: "0px",
             width: "auto",
           }}
+          variants={fadeInVariants}
         >
           {isEnglish ? "Circle" : "Хүрээлэл"}
         </motion.div>
 
         <motion.div
-          ref={subtitleRef}
+          className="flex font-montserrat mt-[40px] mb-[40px] w-[80vw] xl:w-[100vw] justify-center items-center  font-semibold text-[24px] text-[#777] text-center"
           variants={fadeInVariants}
-          className="flex mt-[40px] mb-[40px] text-[36px] line-height-[48px] text-white text-center"
         >
-          <h2>
-            {isEnglish ? (
-              <>
-                A circle of cooperation to create <br /> valuable assets and values <br /> for future generations
-              </>
-            ) : (
-              <>
-                Ашид өвлөгдөх үнэт хөрөнгө, үнэ цэн <br /> бүрийг хамт бүтээх хамтын ажиллагааны <br /> хүрээлэл
-              </>
-            )}
-          </h2>
+          {isEnglish ? (
+            <>
+              A circle of cooperation to create <br /> valuable assets and values <br /> for future generations
+            </>
+          ) : (
+            <>
+              Ашид өвлөгдөх үнэт хөрөнгө, үнэ цэн <br /> бүрийг хамт бүтээх хамтын ажиллагааны <br /> хүрээлэл
+            </>
+          )}
         </motion.div>
 
-        <motion.div ref={gridRef} variants={fadeInVariants} className="w-full">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0.5 mt-6 md:mt-12 mb-10 md:mb-20">
+        <motion.div variants={fadeInVariants} className="w-full">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mt-6 md:mt-12 mb-10 md:mb-20">
             {[
               { src: "/c21.png", alt: "CENTURY 21" },
               { src: "/remax-1.png", alt: "REMAX" },
@@ -193,14 +175,14 @@ export default function Circle() {
             ].map((img, index) => (
               <div
                 key={index}
-                className="flex items-center justify-center p-3 sm:p-4 md:p-6 bg-[#1e1e1e] hover:bg-[#2a2a2a] transition-colors duration-300"
+                className="flex items-center justify-center p-3 sm:p-4 md:p-6 border-[1px] border-white/10 transition-colors duration-300"
               >
                 <div className="relative w-full h-16 sm:h-20 md:h-24 lg:h-28">
                   <Image
                     src={img.src}
                     alt={img.alt}
                     fill
-                    className="object-contain object-center opacity-70 hover:opacity-100 transition-opacity duration-300"
+                    className="object-contain object-center opacity-30 hover:opacity-100 transition-opacity duration-300"
                     sizes="(max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
                   />
                 </div>
@@ -209,9 +191,9 @@ export default function Circle() {
           </div>
         </motion.div>
 
-        <motion.div ref={carouselRef} variants={fadeInVariants} className="mt-[40px] mb-[40px] w-full max-w-4xl">
+        <motion.div variants={fadeInVariants} className="mt-8 sm:mt-10 md:mt-12 mb-8 sm:mb-10 md:mb-12 w-full max-w-4xl px-4 sm:px-6">
           <div className="relative overflow-hidden">
-            <div className="relative h-[200px]">
+            <div className="relative h-32 sm:h-40 md:h-48 lg:h-52">
               <AnimatePresence initial={false} custom={direction} mode="wait" onExitComplete={() => setIsAnimating(false)}>
                 <motion.div
                   key={currentSlide}
@@ -220,33 +202,45 @@ export default function Circle() {
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  className="absolute w-full px-4"
+                  className="absolute w-full px-2 sm:px-4"
                 >
                   <div className="text-center">
                     <p
-                      className="text-[18px] text-white/70 mb-4"
+                      className="text-sm sm:text-base md:text-lg lg:text-xl text-white/70 mb-3 sm:mb-4 leading-relaxed"
                       style={{ fontFamily: "Montserrat" }}
                       dangerouslySetInnerHTML={{ __html: testimonials[currentSlide].content }}
                     />
-                    <p className="text-[18px] text-white/70">{testimonials[currentSlide].author}</p>
+                    <p className="text-sm sm:text-base md:text-lg text-white/70 font-medium">{testimonials[currentSlide].author}</p>
                   </div>
                 </motion.div>
               </AnimatePresence>
             </div>
 
-            {/* Navigation Arrows at Bottom */}
-            <div className="flex justify-center mt-4 space-x-4 gap-[60px]">
-              <button onClick={prevSlide} className="text-white hover:text-gray-300 transition-colors duration-200" aria-label="Previous testimonial">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {/* Navigation Arrows */}
+            <div className="flex justify-center mt-4 sm:mt-6 space-x-8 sm:space-x-12 md:space-x-16">
+              <button
+                onClick={prevSlide}
+                disabled={isAnimating}
+                className="text-white hover:text-gray-300 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed p-2"
+                aria-label="Previous testimonial"
+              >
+                <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
-              <button onClick={nextSlide} className="text-white hover:text-gray-300 transition-colors duration-200" aria-label="Next testimonial">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <button
+                onClick={nextSlide}
+                disabled={isAnimating}
+                className="text-white hover:text-gray-300 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed p-2"
+                aria-label="Next testimonial"
+              >
+                <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
             </div>
+
+            {/* Pagination Dots */}
           </div>
         </motion.div>
         <motion.div
@@ -258,7 +252,7 @@ export default function Circle() {
         >
           <Link href="/contact">
             <motion.div
-              className="flex mt-[100px] mb-[40px] text-[61.425px] text-white text-center hover:opacity-80 transition-opacity duration-300"
+              className="flex mt-[100px] mb-[40px] text-[45px] text-white text-center hover:opacity-80 transition-opacity duration-300"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
