@@ -2,12 +2,34 @@ import Link from "next/link";
 import { FaShareAlt } from "react-icons/fa";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { gql } from "@apollo/client";
+import { useMutation } from "@apollo/client/react";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const WIDGETS_SAVE_LEAD = gql`
+  mutation widgetsSaveLead($formId: String!, $submissions: [FieldValueInput], $browserInfo: JSON!, $cachedCustomerId: String) {
+    widgetsSaveLead(formId: $formId, submissions: $submissions, browserInfo: $browserInfo, cachedCustomerId: $cachedCustomerId) {
+      status
+      conversationId
+      customerId
+      errors {
+        fieldId
+        code
+        text
+        __typename
+      }
+      __typename
+    }
+  }
+`;
 
 interface FooterProps {
   isHomePage?: boolean;
 }
 
 export default function Footer({ isHomePage = false }: FooterProps) {
+  const { isEnglish } = useLanguage();
+  const [saveLead, { loading }] = useMutation(WIDGETS_SAVE_LEAD);
   const [showLoanPopup, setShowLoanPopup] = useState(false);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [selectedDistrict, setSelectedDistrict] = useState("");
@@ -49,7 +71,7 @@ export default function Footer({ isHomePage = false }: FooterProps) {
     }));
   };
 
-  const handleLoanSubmit = (e: React.FormEvent) => {
+  const handleLoanSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormErrors({});
 
@@ -57,24 +79,24 @@ export default function Footer({ isHomePage = false }: FooterProps) {
 
     // Validate required fields
     if (!formData.familyName.trim()) {
-      errors.familyName = "Овог оруулна уу";
+      errors.familyName = isEnglish ? "Please enter your last name" : "Овог оруулна уу";
     }
     if (!formData.firstName.trim()) {
-      errors.firstName = "Нэр оруулна уу";
+      errors.firstName = isEnglish ? "Please enter your first name" : "Нэр оруулна уу";
     }
 
     // Validate contact method
     if (!formData.contactMethod.call && !formData.contactMethod.sms) {
-      errors.contactMethod = "Мэдээлэл авах хэлбэрээ сонгоно уу";
+      errors.contactMethod = isEnglish ? "Please select a contact method" : "Мэдээлэл авах хэлбэрээ сонгоно уу";
     }
 
     // Validate phone numbers if contact method is selected
     if (formData.contactMethod.call && !formData.callPhone.trim()) {
-      errors.callPhone = "Утасны дугаараа оруулна уу";
+      errors.callPhone = isEnglish ? "Please enter your phone number" : "Утасны дугаараа оруулна уу";
     }
 
     if (formData.contactMethod.sms && !formData.smsPhone.trim()) {
-      errors.smsPhone = "SMS утасны дугаараа оруулна уу";
+      errors.smsPhone = isEnglish ? "Please enter your SMS phone number" : "SMS утасны дугаараа оруулна уу";
     }
 
     if (Object.keys(errors).length > 0) {
@@ -82,8 +104,59 @@ export default function Footer({ isHomePage = false }: FooterProps) {
       return;
     }
 
-    setShowLoanPopup(false);
-    setShowSuccessPopup(true);
+    try {
+      const submissions = [
+        { _id: "A3vr-BCMRHmxRr_mdPsFC", type: "input", value: formData.familyName }, // ovog
+        { _id: "A3vr-BCMRHmxRr_mdPsFC", type: "input", value: formData.firstName }, // ner
+        { _id: "A3vr-BCMRHmxRr_mdPsFC", type: "input", value: formData.phone || "" }, // Утас
+        { _id: "A3vr-BCMRHmxRr_mdPsFC", type: "input", value: formData.location || "" }, // Байршил
+        { _id: "A3vr-BCMRHmxRr_mdPsFC", type: "input", value: formData.location || "" }, // Дүүрэг
+        { _id: "A3vr-BCMRHmxRr_mdPsFC", type: "input", value: formData.area }, // Талбайн хэмжээ
+        { _id: "A3vr-BCMRHmxRr_mdPsFC", type: "input", value: formData.purchasePrice }, // Худалдан авах үнэ
+        { _id: "A3vr-BCMRHmxRr_mdPsFC", type: "input", value: formData.area }, // Талбайн сонголт
+        { _id: "A3vr-BCMRHmxRr_mdPsFC", type: "input", value: formData.contactMethod.call ? "Утас" : formData.contactMethod.sms ? "SMS/Viber" : "" }, // Мэдээлэл авах хэлбэр
+      ];
+
+      const browserInfo = {
+        language: navigator.language,
+        userAgent: navigator.userAgent,
+        url: window.location.href,
+        timestamp: new Date().toISOString(),
+      };
+
+      console.log("Sending footer form data:", {
+        formId: "A3vr-BCMRHmxRr_mdPsFC",
+        submissions,
+        browserInfo,
+      });
+
+      const { data } = await saveLead({
+        variables: {
+          formId: "A3vr-BCMRHmxRr_mdPsFC",
+          submissions,
+          browserInfo,
+        },
+      });
+
+      console.log("Footer form response:", data);
+
+      if (data && typeof data === "object" && "widgetsSaveLead" in data) {
+        const result = (data as Record<string, unknown>).widgetsSaveLead as Record<string, unknown>;
+
+        if (result.status === "ok") {
+          setShowLoanPopup(false);
+          setShowSuccessPopup(true);
+          resetForm();
+        } else {
+          const errors = result.errors as Array<{ text: string }> | undefined;
+          const errorMessage = errors && errors.length > 0 ? errors[0].text : isEnglish ? "Failed to send" : "Амжилтгүй боллоо";
+          setFormErrors({ submit: errorMessage });
+        }
+      }
+    } catch (error) {
+      console.error("Footer form error:", error);
+      setFormErrors({ submit: isEnglish ? "Failed to send request. Please try again." : "Амжилтгүй боллоо. Дахин оролдоно уу." });
+    }
   };
 
   const closeLoanPopup = () => {
@@ -365,10 +438,12 @@ export default function Footer({ isHomePage = false }: FooterProps) {
 
                     <button
                       type="submit"
-                      className="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                      disabled={loading}
+                      className="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-orange-400 disabled:cursor-not-allowed text-white font-medium py-3 px-6 rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
                     >
-                      Хүсэлт илгээх
+                      {loading ? (isEnglish ? "Sending..." : "Илгээж байна...") : isEnglish ? "Send Request" : "Хүсэлт илгээх"}
                     </button>
+                    {formErrors.submit && <p className="text-red-500 text-sm mt-2 text-center">{formErrors.submit}</p>}
                   </div>
 
                   {/* Right Column - Districts and Age Selection */}

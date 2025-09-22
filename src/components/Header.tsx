@@ -46,10 +46,11 @@ export default function Header() {
         scrolled ? "bg-black/20 backdrop-blur-md border-b border-white/10" : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Option 1: Much wider - only small side margins */}
+      <div className=" mx-[50px] px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-24">
           <div className="flex items-center gap-3">
-            <Image src="/Logo2.png" alt="logo" width={120} height={120} className="w-20 object-contain h-20 sm:w-24 sm:h-24" />
+            <Image src="/Logo2.png" alt="logo" width={80} height={50} className="w-16 object-contain h-10 sm:w-20 sm:h-12" />
             <div className="h-[50px] w-[1px] bg-white"></div>
             <div className="">
               <h1 className="text-white text-sm sm:text-base font-bold" style={{ fontFamily: "Montserrat" }}>
