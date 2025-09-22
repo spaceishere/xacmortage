@@ -10,9 +10,15 @@ export default function LoanCalculator() {
   const [monthlyPayment, setMonthlyPayment] = useState(0);
   const [editingField, setEditingField] = useState<string | null>(null);
 
-  // Calculate monthly payment
+  // Calculate monthly payment and validate down payment
   useEffect(() => {
-    const principal = loanAmount - downPayment;
+    // Validate and adjust down payment when loan amount changes
+    const maxDownPayment = loanAmount * 0.5;
+    if (downPayment > maxDownPayment) {
+      setDownPayment(maxDownPayment);
+    }
+
+    const principal = loanAmount - Math.min(downPayment, maxDownPayment);
     const monthlyRate = interestRate / 100 / 12;
     const numPayments = loanTerm;
 
@@ -167,7 +173,10 @@ export default function LoanCalculator() {
               <SliderInput
                 label="Урьдчилгаа төлбөр"
                 value={downPayment}
-                onChange={setDownPayment}
+                onChange={(value) => {
+                  const maxDownPayment = loanAmount * 0.5;
+                  setDownPayment(Math.min(value, maxDownPayment));
+                }}
                 min={0}
                 max={loanAmount * 0.5}
                 step={100000}
