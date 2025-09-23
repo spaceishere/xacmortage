@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Great_Vibes } from "next/font/google";
-import { FiChevronLeft, FiChevronRight, FiX } from "react-icons/fi";
+import { FiChevronLeft, FiChevronRight, FiX, FiHome, FiGrid, FiSend } from "react-icons/fi";
 import Link from "next/link";
 
 const greatVibes = Great_Vibes({
@@ -60,13 +60,7 @@ export default function Hero() {
     smsPhone: "",
   });
 
-  const districts = [
-    "Хан-Уул",
-    "Баянзүрх",
-    "Сүхбаатар",
-    "Сонгино-Хайрхан",
-    "Баянгол",
-  ];
+  const districts = ["Хан-Уул", "Баянзүрх", "Сүхбаатар", "Сонгино-Хайрхан", "Баянгол"];
   const ageRanges = ["80-аас доош", "80-90", "91-100", "101-200"];
 
   useEffect(() => {
@@ -104,10 +98,7 @@ export default function Hero() {
     };
   }, [index, locked, lastScrollTime, showLoanPopup]);
 
-  const handleInputChange = (
-    field: keyof FormData,
-    value: string | { call: boolean; sms: boolean }
-  ) => {
+  const handleInputChange = (field: keyof FormData, value: string | { call: boolean; sms: boolean }) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value,
@@ -194,7 +185,7 @@ export default function Hero() {
   if (!currentVideo) return null;
 
   return (
-    <div className="flex">
+    <div className="flex overflow-hidden">
       <section className="relative h-screen w-full overflow-hidden">
         {/* Background video */}
         <div className="fixed inset-0 z-0 lg:-z-10">
@@ -219,7 +210,7 @@ export default function Hero() {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 h-full flex flex-col justify-between pt-16 sm:pt-20 md:pt-24">
+        <div className="relative z-10 h-full flex flex-col justify-between pt-16 sm:pt-20 md:pt-[300px]">
           <div className="flex-1 flex items-center">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
@@ -238,13 +229,9 @@ export default function Hero() {
                     <div className="w-[8%] h-[1px] bg-white/30"></div>
 
                     <div className="text-white flex justify-center items-center text-lg xl:text-2xl font-light font-mono flex-shrink-0">
-                      <span className="opacity-70">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
+                      <span className="opacity-70">{String(index + 1).padStart(2, "0")}</span>
                       <span className="opacity-30 mx-1">|</span>
-                      <span className="opacity-30">
-                        {String(videos.length).padStart(2, "0")}
-                      </span>
+                      <span className="opacity-30">{String(videos.length).padStart(2, "0")}</span>
                     </div>
 
                     <div className="flex-1 h-[1px] bg-white/30"></div>
@@ -260,7 +247,7 @@ export default function Hero() {
                       >
                         <h1
                           style={{ fontFamily: "Montana" }}
-                          className="text-white text-5xl xl:text-7xl 2xl:text-8xl drop-shadow-lg whitespace-normal max-w-4xl mx-auto text-center leading-tight"
+                          className="text-white text-5xl  drop-shadow-lg whitespace-normal max-w-4xl mx-auto text-center leading-tight"
                         >
                           {currentVideo.text}
                         </h1>
@@ -312,9 +299,7 @@ export default function Hero() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
                       >
-                        <h1
-                          className={`text-white text-3xl sm:text-4xl md:text-5xl drop-shadow-lg leading-tight ${greatVibes.className}`}
-                        >
+                        <h1 className={`text-white text-3xl sm:text-4xl md:text-5xl drop-shadow-lg leading-tight ${greatVibes.className}`}>
                           {currentVideo.text}
                         </h1>
                       </motion.div>
@@ -337,13 +322,9 @@ export default function Hero() {
                       </button>
 
                       <div className="text-white flex items-center text-lg font-light font-mono">
-                        <span className="opacity-70">
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
+                        <span className="opacity-70">{String(index + 1).padStart(2, "0")}</span>
                         <span className="opacity-30 mx-2">|</span>
-                        <span className="opacity-30">
-                          {String(videos.length).padStart(2, "0")}
-                        </span>
+                        <span className="opacity-30">{String(videos.length).padStart(2, "0")}</span>
                       </div>
 
                       <button
@@ -368,67 +349,81 @@ export default function Hero() {
         </div>
       </section>
 
-      {/* Action Buttons - Responsive positioning */}
+      {/* Action Buttons - Icon-based with hover text */}
       <div
-        className="fixed bottom-[100px] left-1/2 transform -translate-x-1/2 flex flex-row gap-2 sm:gap-3 md:gap-4 z-50 
+        className="fixed bottom-[100px] left-1/2 transform -translate-x-1/2 flex flex-row gap-3 sm:gap-4 md:gap-6 z-50 
                       lg:bottom-auto lg:right-6 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-0 lg:left-auto lg:flex-col lg:gap-4 xl:gap-6"
       >
-        {/* Орон сууц хайх */}
+        {/* Орон сууц хайх - Home Icon */}
         <div className="group relative">
           <motion.button
-            className="h-10 w-24 sm:h-12 sm:w-28 md:h-14 md:w-32 lg:h-12 lg:w-36 xl:h-14 xl:w-40 bg-white/20 backdrop-blur-md text-white font-semibold px-2 sm:px-3 md:px-4 lg:px-6 rounded-lg transition-all duration-300 transform shadow-2xl border border-white/30 hover:bg-white/30 flex items-center justify-center text-xs sm:text-sm"
+            className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 lg:h-14 lg:w-14 xl:h-16 xl:w-16 bg-white rounded-xl shadow-lg border border-white/20 flex items-center justify-center transition-all duration-300 hover:shadow-xl hover:scale-105"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            style={{ fontFamily: "Montserrat" }}
           >
-            Орон сууц хайх
+            <FiHome size={24} className="text-gray-600 group-hover:text-orange-500 transition-colors duration-300" />
           </motion.button>
 
-          {/* Dropdown - Responsive positioning */}
-          <div className="absolute top-full left-1/2 transform -translate-x-1/2 lg:top-0 lg:right-full lg:mr-3 lg:left-auto lg:translate-x-0 lg:-translate-y-0 mt-2 lg:mt-0 opacity-0 translate-y-2 lg:translate-y-0 lg:-translate-x-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 group-hover:pointer-events-auto transition-all duration-300 ease-in-out">
+          {/* Hover Tooltip */}
+          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 lg:bottom-auto lg:top-1/2 lg:-translate-y-1/2 lg:right-full lg:mr-3 lg:left-auto lg:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/80 lg:top-1/2 lg:left-full lg:transform-none lg:border-l-black/80 lg:border-r-transparent lg:border-t-4 lg:border-b-4 lg:border-l-4 lg:border-t-transparent lg:border-b-transparent"></div>
+          </div>
+
+          {/* Dropdown Menu */}
+          <div className="absolute top-full left-1/2 transform -translate-x-1/2 lg:top-1/2 lg:right-full lg:mr-1 lg:left-auto lg:-translate-y-1/2 mt-2 lg:mt-0 opacity-0 translate-y-2 lg:translate-y-0 lg:-translate-x-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 group-hover:pointer-events-auto transition-all duration-300 ease-in-out">
             <div className="flex flex-col gap-2 bg-white/10 backdrop-blur-md rounded-lg p-2 sm:p-3 border border-white/20 min-w-max max-w-[200px] sm:max-w-none">
-              <Link
-                href="https://www.remax.mn/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs sm:text-sm text-gray-300 hover:text-blue-400 transition-colors duration-200 whitespace-nowrap"
+              <button
+                onClick={() => window.open("https://www.remax.mn/", "_blank")}
+                className="text-xs sm:text-sm text-gray-300 hover:text-blue-400 transition-colors duration-200 whitespace-nowrap text-left"
               >
                 RE/MAX Mongolia
-              </Link>
-              <Link
-                href="https://www.unegui.mn/l-hdlh/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs sm:text-sm text-gray-300 hover:text-blue-400 transition-colors duration-200 whitespace-nowrap"
+              </button>
+              <button
+                onClick={() => window.open("https://www.unegui.mn/l-hdlh/l-hdlh-zarna/", "_blank")}
+                className="text-xs sm:text-sm text-gray-300 hover:text-blue-400 transition-colors duration-200 whitespace-nowrap text-left"
               >
                 Unegui
-              </Link>
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Тооцоолуур */}
-        <Link href="/calculator">
+        {/* Тооцоолуур - Calculator Icon */}
+        <div className="group relative">
+          <Link href="/calculator">
+            <motion.button
+              className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 lg:h-14 lg:w-14 xl:h-16 xl:w-16 bg-white rounded-xl shadow-lg border border-white/20 flex items-center justify-center transition-all duration-300 hover:shadow-xl hover:scale-105"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FiGrid size={24} className="text-gray-600 group-hover:text-orange-500 transition-colors duration-300" />
+            </motion.button>
+          </Link>
+
+          {/* Hover Tooltip */}
+          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 lg:bottom-auto lg:top-1/2 lg:-translate-y-1/2 lg:right-full lg:mr-3 lg:left-auto lg:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+            <div className="bg-black/80 text-white text-xs sm:text-sm px-3 py-2 rounded-lg whitespace-nowrap backdrop-blur-sm">Тооцоолуур</div>
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/80 lg:top-1/2 lg:left-full lg:transform-none lg:border-l-black/80 lg:border-r-transparent lg:border-t-4 lg:border-b-4 lg:border-l-4 lg:border-t-transparent lg:border-b-transparent"></div>
+          </div>
+        </div>
+
+        {/* Хүсэлт илгээх - Send Icon */}
+        <div className="group relative">
           <motion.button
-            className="h-10 w-24 sm:h-12 sm:w-28 md:h-14 md:w-32 lg:h-12 lg:w-36 xl:h-14 xl:w-40 bg-white/20 backdrop-blur-md text-white font-semibold px-2 sm:px-3 md:px-4 lg:px-6 rounded-lg transition-all duration-300 transform shadow-2xl border border-white/30 hover:bg-white/30 flex items-center justify-center text-xs sm:text-sm"
+            onClick={() => setShowLoanPopup(true)}
+            className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 lg:h-14 lg:w-14 xl:h-16 xl:w-16 bg-white rounded-xl shadow-lg border border-white/20 flex items-center justify-center transition-all duration-300 hover:shadow-xl hover:scale-105"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            style={{ fontFamily: "Montserrat" }}
           >
-            Тооцоолуур
+            <FiSend size={24} className="text-gray-600 group-hover:text-orange-500 transition-colors duration-300" />
           </motion.button>
-        </Link>
 
-        {/* Хүсэлт илгээх */}
-        <motion.button
-          onClick={() => setShowLoanPopup(true)}
-          className="h-10 w-24 sm:h-12 sm:w-28 md:h-14 md:w-32 lg:h-12 lg:w-36 xl:h-14 xl:w-40 bg-white/20 backdrop-blur-md text-white font-semibold px-2 sm:px-3 md:px-4 lg:px-6 rounded-lg transition-all duration-300 transform shadow-2xl border border-white/30 hover:bg-white/30 flex items-center justify-center text-xs sm:text-sm"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          style={{ fontFamily: "Montserrat" }}
-        >
-          Хүсэлт илгээх
-        </motion.button>
+          {/* Hover Tooltip */}
+          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 lg:bottom-auto lg:top-1/2 lg:-translate-y-1/2 lg:right-full lg:mr-3 lg:left-auto lg:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+            <div className="bg-black/80 text-white text-xs sm:text-sm px-3 py-2 rounded-lg whitespace-nowrap backdrop-blur-sm">Хүсэлт илгээх</div>
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/80 lg:top-1/2 lg:left-full lg:transform-none lg:border-l-black/80 lg:border-r-transparent lg:border-t-4 lg:border-b-4 lg:border-l-4 lg:border-t-transparent lg:border-b-transparent"></div>
+          </div>
+        </div>
       </div>
 
       {/* Loan Form Popup - Responsive */}
@@ -464,70 +459,44 @@ export default function Hero() {
               <form onSubmit={handleLoanSubmit} className="p-4 sm:p-6 lg:p-8">
                 {/* Section 1: Personal Information */}
                 <div className="mb-6 sm:mb-8">
-                  <h2 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-gray-800">
-                    1 Хувийн мэдээлэл
-                  </h2>
+                  <h2 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-gray-800">1 Хувийн мэдээлэл</h2>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Овог: *
-                      </label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Овог: *</label>
                       <input
                         type="text"
                         value={formData.familyName}
-                        onChange={(e) =>
-                          handleInputChange("familyName", e.target.value)
-                        }
+                        onChange={(e) => handleInputChange("familyName", e.target.value)}
                         className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 text-sm sm:text-base ${
-                          formErrors.familyName
-                            ? "border-red-500 focus:ring-red-500"
-                            : "border-gray-300 focus:ring-orange-500"
+                          formErrors.familyName ? "border-red-500 focus:ring-red-500" : "border-gray-300 focus:ring-orange-500"
                         }`}
                         required
                       />
-                      {formErrors.familyName && (
-                        <p className="text-red-500 text-xs mt-1">
-                          {formErrors.familyName}
-                        </p>
-                      )}
+                      {formErrors.familyName && <p className="text-red-500 text-xs mt-1">{formErrors.familyName}</p>}
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Нэр: *
-                      </label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Нэр: *</label>
                       <input
                         type="text"
                         value={formData.firstName}
-                        onChange={(e) =>
-                          handleInputChange("firstName", e.target.value)
-                        }
+                        onChange={(e) => handleInputChange("firstName", e.target.value)}
                         className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 text-sm sm:text-base ${
-                          formErrors.firstName
-                            ? "border-red-500 focus:ring-red-500"
-                            : "border-gray-300 focus:ring-orange-500"
+                          formErrors.firstName ? "border-red-500 focus:ring-red-500" : "border-gray-300 focus:ring-orange-500"
                         }`}
                         required
                       />
-                      {formErrors.firstName && (
-                        <p className="text-red-500 text-xs mt-1">
-                          {formErrors.firstName}
-                        </p>
-                      )}
+                      {formErrors.firstName && <p className="text-red-500 text-xs mt-1">{formErrors.firstName}</p>}
                     </div>
                   </div>
 
                   <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Утас:
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Утас:</label>
                     <input
                       type="tel"
                       value={formData.phone}
-                      onChange={(e) =>
-                        handleInputChange("phone", e.target.value)
-                      }
+                      onChange={(e) => handleInputChange("phone", e.target.value)}
                       placeholder="Утасны дугаар"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm sm:text-base"
                     />
@@ -536,16 +505,12 @@ export default function Hero() {
 
                 {/* Section 2: Property Information */}
                 <div className="mb-6 sm:mb-8">
-                  <h2 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-gray-800">
-                    2 Худалдан авах Орон сууцны мэдээлэл
-                  </h2>
+                  <h2 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-gray-800">2 Худалдан авах Орон сууцны мэдээлэл</h2>
 
                   <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
                     <div className="space-y-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Байршил:
-                        </label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Байршил:</label>
                         <select
                           value={formData.location}
                           onChange={(e) => {
@@ -564,43 +529,29 @@ export default function Hero() {
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Талбайн хэмжээ:
-                        </label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Талбайн хэмжээ:</label>
                         <input
                           type="text"
                           value={formData.area}
-                          onChange={(e) =>
-                            handleInputChange("area", e.target.value)
-                          }
+                          onChange={(e) => handleInputChange("area", e.target.value)}
                           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm sm:text-base"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Худалдан авах үнэ:
-                        </label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Худалдан авах үнэ:</label>
                         <input
                           type="text"
                           value={formData.purchasePrice}
-                          onChange={(e) =>
-                            handleInputChange("purchasePrice", e.target.value)
-                          }
+                          onChange={(e) => handleInputChange("purchasePrice", e.target.value)}
                           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm sm:text-base"
                         />
                       </div>
 
                       {/* Contact Method - Responsive */}
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-3">
-                          Мэдээлэл авах хэлбэрээ сонгоно уу: *
-                        </label>
-                        {formErrors.contactMethod && (
-                          <p className="text-red-500 text-xs mb-2">
-                            {formErrors.contactMethod}
-                          </p>
-                        )}
+                        <label className="block text-sm font-medium text-gray-700 mb-3">Мэдээлэл авах хэлбэрээ сонгоно уу: *</label>
+                        {formErrors.contactMethod && <p className="text-red-500 text-xs mb-2">{formErrors.contactMethod}</p>}
 
                         <div className="space-y-3 sm:space-y-4">
                           <div className="space-y-2">
@@ -609,15 +560,10 @@ export default function Hero() {
                                 type="checkbox"
                                 id="call"
                                 checked={formData.contactMethod.call}
-                                onChange={() =>
-                                  handleContactMethodChange("call")
-                                }
+                                onChange={() => handleContactMethodChange("call")}
                                 className="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
                               />
-                              <label
-                                htmlFor="call"
-                                className="text-sm font-medium text-gray-700"
-                              >
+                              <label htmlFor="call" className="text-sm font-medium text-gray-700">
                                 Утас
                               </label>
                             </div>
@@ -625,21 +571,13 @@ export default function Hero() {
                               type="tel"
                               placeholder="Утасны дугаар"
                               value={formData.callPhone}
-                              onChange={(e) =>
-                                handleInputChange("callPhone", e.target.value)
-                              }
+                              onChange={(e) => handleInputChange("callPhone", e.target.value)}
                               disabled={!formData.contactMethod.call}
                               className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 disabled:bg-gray-100 disabled:cursor-not-allowed text-sm sm:text-base ${
-                                formErrors.callPhone
-                                  ? "border-red-500 focus:ring-red-500"
-                                  : "border-gray-300 focus:ring-orange-500"
+                                formErrors.callPhone ? "border-red-500 focus:ring-red-500" : "border-gray-300 focus:ring-orange-500"
                               }`}
                             />
-                            {formErrors.callPhone && (
-                              <p className="text-red-500 text-xs">
-                                {formErrors.callPhone}
-                              </p>
-                            )}
+                            {formErrors.callPhone && <p className="text-red-500 text-xs">{formErrors.callPhone}</p>}
                           </div>
 
                           <div className="space-y-2">
@@ -648,15 +586,10 @@ export default function Hero() {
                                 type="checkbox"
                                 id="sms"
                                 checked={formData.contactMethod.sms}
-                                onChange={() =>
-                                  handleContactMethodChange("sms")
-                                }
+                                onChange={() => handleContactMethodChange("sms")}
                                 className="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
                               />
-                              <label
-                                htmlFor="sms"
-                                className="text-sm font-medium text-gray-700"
-                              >
+                              <label htmlFor="sms" className="text-sm font-medium text-gray-700">
                                 SMS/Viber
                               </label>
                             </div>
@@ -664,21 +597,13 @@ export default function Hero() {
                               type="tel"
                               placeholder="SMS (Viber) утасны дугаар"
                               value={formData.smsPhone}
-                              onChange={(e) =>
-                                handleInputChange("smsPhone", e.target.value)
-                              }
+                              onChange={(e) => handleInputChange("smsPhone", e.target.value)}
                               disabled={!formData.contactMethod.sms}
                               className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 disabled:bg-gray-100 disabled:cursor-not-allowed text-sm sm:text-base ${
-                                formErrors.smsPhone
-                                  ? "border-red-500 focus:ring-red-500"
-                                  : "border-gray-300 focus:ring-orange-500"
+                                formErrors.smsPhone ? "border-red-500 focus:ring-red-500" : "border-gray-300 focus:ring-orange-500"
                               }`}
                             />
-                            {formErrors.smsPhone && (
-                              <p className="text-red-500 text-xs">
-                                {formErrors.smsPhone}
-                              </p>
-                            )}
+                            {formErrors.smsPhone && <p className="text-red-500 text-xs">{formErrors.smsPhone}</p>}
                           </div>
                         </div>
                       </div>
@@ -694,9 +619,7 @@ export default function Hero() {
                     {/* Right Column - Districts and Age Selection */}
                     <div className="space-y-4 sm:space-y-6">
                       <div>
-                        <h3 className="text-sm font-medium text-gray-700 mb-3">
-                          Дүүрэг:
-                        </h3>
+                        <h3 className="text-sm font-medium text-gray-700 mb-3">Дүүрэг:</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                           {districts.map((district) => (
                             <button
@@ -719,9 +642,7 @@ export default function Hero() {
                       </div>
 
                       <div>
-                        <h3 className="text-sm font-medium text-gray-700 mb-3">
-                          Талбайн сонголт:
-                        </h3>
+                        <h3 className="text-sm font-medium text-gray-700 mb-3">Талбайн сонголт:</h3>
                         <div className="space-y-2">
                           {ageRanges.map((range) => (
                             <button
@@ -745,22 +666,12 @@ export default function Hero() {
 
                       {/* Contact Information */}
                       <div className="bg-gray-50 p-3 sm:p-4 rounded-lg">
-                        <h3 className="text-sm font-medium text-gray-700 mb-2">
-                          Хүсэлт илгээх
-                        </h3>
-                        <p className="text-xs text-gray-600 mb-2">
-                          Таны хүсэлт Амжилттай илгээгдлээ.
-                        </p>
+                        <h3 className="text-sm font-medium text-gray-700 mb-2">Хүсэлт илгээх</h3>
+                        <p className="text-xs text-gray-600 mb-2">Таны хүсэлт Амжилттай илгээгдлээ.</p>
                         <p className="text-xs text-gray-600 mb-1">Бид Танруу</p>
-                        <p className="text-xs text-gray-600 mb-1">
-                          (Ажлын өдөр 9:00-17:00 хооронд)
-                        </p>
-                        <p className="text-xs text-orange-600 font-medium">
-                          8001-0218, 8001-0219-аас холбогдох
-                        </p>
-                        <p className="text-xs text-gray-600">
-                          дэлгэрэнгүй мэдээлэл өгөх болно.
-                        </p>
+                        <p className="text-xs text-gray-600 mb-1">(Ажлын өдөр 9:00-17:00 хооронд)</p>
+                        <p className="text-xs text-orange-600 font-medium">8001-0218, 8001-0219-аас холбогдох</p>
+                        <p className="text-xs text-gray-600">дэлгэрэнгүй мэдээлэл өгөх болно.</p>
                       </div>
                     </div>
                   </div>
@@ -792,37 +703,20 @@ export default function Hero() {
               <div className="text-center">
                 {/* Success Icon with Animation */}
                 <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-lg">
-                  <svg
-                    className="w-8 h-8 sm:w-10 sm:h-10 text-white animate-pulse"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="3"
-                      d="M5 13l4 4L19 7"
-                    ></path>
+                  <svg className="w-8 h-8 sm:w-10 sm:h-10 text-white animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
                   </svg>
                 </div>
 
                 {/* Success Message */}
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-3 sm:mb-4">
-                  Амжилттай илгээгдлээ! ✨
-                </h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-3 sm:mb-4">Амжилттай илгээгдлээ! ✨</h3>
 
                 <div className="bg-orange-50 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
                   <p className="text-sm text-gray-700 mb-2 sm:mb-3 leading-relaxed">
-                    Таны <strong>моргэйжийн хүсэлт</strong> амжилттай
-                    бүртгэгдлээ.
+                    Таны <strong>моргэйжийн хүсэлт</strong> амжилттай бүртгэгдлээ.
                   </p>
-                  <p className="text-sm text-orange-600 font-semibold mb-1 sm:mb-2">
-                    📞 Холбогдох утас: 8001-0218, 8001-0219
-                  </p>
-                  <p className="text-xs text-gray-600">
-                    ⏰ Ажлын өдөр: 9:00-17:00 хооронд
-                  </p>
+                  <p className="text-sm text-orange-600 font-semibold mb-1 sm:mb-2">📞 Холбогдох утас: 8001-0218, 8001-0219</p>
+                  <p className="text-xs text-gray-600">⏰ Ажлын өдөр: 9:00-17:00 хооронд</p>
                 </div>
 
                 {/* Action Buttons */}

@@ -26,6 +26,9 @@ body {
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
 }
+::-webkit-scrollbar {
+  display: none; /* hides scrollbar completely */
+}
 
 html {
   overflow-x: hidden;

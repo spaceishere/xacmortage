@@ -125,7 +125,7 @@ export default function Circle() {
   };
 
   return (
-    <div className="flex justify-center items-center pt-[200px] flex-col w-full min-h-screen bg-[#18141414] overflow-x-hidden">
+    <div className="flex justify-center items-center pb-[100px] pt-[200px] flex-col w-full min-h-screen bg-[#18141414] overflow-x-hidden">
       <motion.div
         className="flex justify-center items-center flex-col gap-[100px] max-w-[1160px]"
         initial="hidden"
@@ -161,13 +161,11 @@ export default function Circle() {
         >
           {isEnglish ? (
             <>
-              A circle of cooperation to create <br /> valuable assets and
-              values <br /> for future generations
+              A circle of cooperation to create <br /> valuable assets and values <br /> for future generations
             </>
           ) : (
             <>
-              Ашид өвлөгдөх үнэт хөрөнгө, үнэ цэн <br /> бүрийг хамт бүтээх
-              хамтын ажиллагааны <br /> хүрээлэл
+              Ашид өвлөгдөх үнэт хөрөнгө, үнэ цэн <br /> бүрийг хамт бүтээх хамтын ажиллагааны <br /> хүрээлэл
             </>
           )}
         </motion.div>
@@ -202,18 +200,10 @@ export default function Circle() {
           </div>
         </motion.div>
 
-        <motion.div
-          variants={fadeInVariants}
-          className="mt-8 sm:mt-10 md:mt-12 mb-8 sm:mb-10 md:mb-12 w-full max-w-4xl px-4 sm:px-6"
-        >
+        <motion.div variants={fadeInVariants} className="mt-8 sm:mt-10 md:mt-12 mb-8 sm:mb-10 md:mb-12 w-full max-w-4xl px-4 sm:px-6">
           <div className="relative overflow-hidden">
             <div className="relative h-32 sm:h-40 md:h-48 lg:h-52">
-              <AnimatePresence
-                initial={false}
-                custom={direction}
-                mode="wait"
-                onExitComplete={() => setIsAnimating(false)}
-              >
+              <AnimatePresence initial={false} custom={direction} mode="wait" onExitComplete={() => setIsAnimating(false)}>
                 <motion.div
                   key={currentSlide}
                   custom={direction}
@@ -247,19 +237,8 @@ export default function Circle() {
                 className="text-white hover:text-gray-300 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed p-2"
                 aria-label="Previous testimonial"
               >
-                <svg
-                  className="w-5 h-5 sm:w-6 sm:h-6"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M15 18L9 12L15 6"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
               <button
@@ -268,19 +247,8 @@ export default function Circle() {
                 className="text-white hover:text-gray-300 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed p-2"
                 aria-label="Next testimonial"
               >
-                <svg
-                  className="w-5 h-5 sm:w-6 sm:h-6"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9 18L15 12L9 6"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
             </div>
