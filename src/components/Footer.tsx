@@ -233,14 +233,14 @@ export default function Footer({ isHomePage = false }: FooterProps) {
 
         {/* Баруун тал */}
         <div className="group flex flex-col gap-[50px] items-start">
-          <div className="flex items-center justify-center gap-[30px] cursor-pointer">
+          <div className="flex items-center justify-center gap-[10px] cursor-pointer">
             <p className="text-[15px] font-bold text-white" style={{ fontFamily: "Montserrat" }}>
               {" "}
               Social{" "}
             </p>
             <FaShareAlt size={15} color="white" />
           </div>
-          <div className="max-h-0 text-white flex justify-between w-full items-center overflow-hidden transition-all duration-500 ease-in-out group-hover:max-h-20">
+          <div className="max-h-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:max-h-20 text-white">
             <Link href="https://www.instagram.com/xacmortgage/">
               <p style={{ fontFamily: "Montserrat" }}>In</p>
             </Link>
