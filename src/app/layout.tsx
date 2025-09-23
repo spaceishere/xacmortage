@@ -36,8 +36,7 @@ export default function RootLayout({
         <Providers>
           <LanguageProvider>
             <Header />
-
-            {children}
+            <div className="mb-[50px]">{children}</div>
             <FooterWrapper />
           </LanguageProvider>
         </Providers>

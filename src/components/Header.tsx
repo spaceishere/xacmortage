@@ -49,7 +49,7 @@ export default function Header() {
       }`}
     >
       {/* Option 1: Much wider - only small side margins */}
-      <div className=" mx-[50px] px-4 sm:px-6 lg:px-8">
+      <div className=" mx-[10px] lg:mx-[50px] ">
         <div className="flex justify-between items-center h-24">
           <div className="flex items-center gap-3">
             <Image
