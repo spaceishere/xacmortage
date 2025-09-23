@@ -23,7 +23,9 @@ export default function LoanCalculator() {
     const numPayments = loanTerm;
 
     if (principal > 0 && monthlyRate > 0) {
-      const payment = (principal * monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / (Math.pow(1 + monthlyRate, numPayments) - 1);
+      const payment =
+        (principal * monthlyRate * Math.pow(1 + monthlyRate, numPayments)) /
+        (Math.pow(1 + monthlyRate, numPayments) - 1);
       setMonthlyPayment(payment);
     } else {
       setMonthlyPayment(principal / numPayments);
@@ -79,7 +81,11 @@ export default function LoanCalculator() {
             {isEditing ? (
               <input
                 type="text"
-                defaultValue={typeof value === "number" && value < 100 ? value.toFixed(1) : formatMoney(value).replace("₮", "")}
+                defaultValue={
+                  typeof value === "number" && value < 100
+                    ? value.toFixed(1)
+                    : formatMoney(value).replace("₮", "")
+                }
                 onBlur={(e) => handleInputSubmit(e.target.value)}
                 onKeyDown={handleKeyPress}
                 className="text-white font-semibold bg-transparent border-b border-white/30 focus:border-orange-400 focus:outline-none text-right min-w-[100px]"
@@ -90,7 +96,9 @@ export default function LoanCalculator() {
                 onClick={() => setEditingField(fieldKey)}
                 className="text-white font-semibold hover:text-orange-300 transition-colors cursor-pointer"
               >
-                {typeof value === "number" && value < 100 ? value.toFixed(1) : formatMoney(value).replace("₮", "")}
+                {typeof value === "number" && value < 100
+                  ? value.toFixed(1)
+                  : formatMoney(value).replace("₮", "")}
                 {suffix}
               </button>
             )}
@@ -121,13 +129,17 @@ export default function LoanCalculator() {
               e.preventDefault();
               const startX = e.clientX;
               const startValue = value;
-              const rangeWidth = e.currentTarget.parentElement?.offsetWidth || 0;
+              const rangeWidth =
+                e.currentTarget.parentElement?.offsetWidth || 0;
 
               const handleMouseMove = (moveEvent: MouseEvent) => {
                 const deltaX = moveEvent.clientX - startX;
                 const deltaPercent = (deltaX / rangeWidth) * 100;
                 const deltaValue = ((max - min) * deltaPercent) / 100;
-                const newValue = Math.max(min, Math.min(max, startValue + deltaValue));
+                const newValue = Math.max(
+                  min,
+                  Math.min(max, startValue + deltaValue)
+                );
                 onChange(newValue);
               };
 
@@ -146,16 +158,27 @@ export default function LoanCalculator() {
   };
 
   return (
-    <div className="min-h-screen pt-[200px] bg-[#181414] p-6">
+    <div
+      className="min-h-screen pt-[200px] bg-[#181414] p-6"
+      style={{
+        fontFamily: "Montserrat",
+      }}
+    >
       <div className="max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Calculator Panel */}
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-xl border border-white/20">
-            <div className="text-center mb-8">
+            <div className="text-center mb-8 font-semibold">
               <div className="flex justify-center items-center mb-4">
-                <img src="/Logo2.png" alt="XAC Leasing Logo" className="h-16 w-auto" />
+                <img
+                  src="/Logo2.png"
+                  alt="XAC Leasing Logo"
+                  className="h-16 w-auto"
+                />
               </div>
-              <h1 className="text-3xl font-bold text-white mb-2">ТООЦООЛУУР</h1>
+              <h1 className="text-3xl font-semibold text-white mb-2">
+                ТООЦООЛУУР
+              </h1>
               <div className="w-20 h-1 bg-gradient-to-r from-orange-400 to-orange-500 mx-auto rounded-full"></div>
             </div>
 
@@ -218,7 +241,9 @@ export default function LoanCalculator() {
 
               <div className="bg-gradient-to-r from-orange-500/20 to-orange-600/20 rounded-xl p-4 mb-6 border border-orange-400/30">
                 <div className="text-white/70 text-sm mb-1">Сард төлөх дүн</div>
-                <div className="text-xl font-bold text-orange-400">{formatMoney(monthlyPayment)}</div>
+                <div className="text-xl font-bold text-orange-400">
+                  {formatMoney(monthlyPayment)}
+                </div>
               </div>
             </div>
 
@@ -231,15 +256,23 @@ export default function LoanCalculator() {
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between items-center py-2 border-b border-white/10">
                   <span className="text-white/70">Зээлийн дүн:</span>
-                  <span className="text-white font-medium">{formatMoney(loanAmount - downPayment)}</span>
+                  <span className="text-white font-medium">
+                    {formatMoney(loanAmount - downPayment)}
+                  </span>
                 </div>
                 <div className="flex justify-between items-center py-2 border-b border-white/10">
                   <span className="text-white/70">Нийт төлөх дүн:</span>
-                  <span className="text-white font-medium">{formatMoney(monthlyPayment * loanTerm)}</span>
+                  <span className="text-white font-medium">
+                    {formatMoney(monthlyPayment * loanTerm)}
+                  </span>
                 </div>
                 <div className="flex justify-between items-center py-2">
                   <span className="text-white/70">Нийт хүү:</span>
-                  <span className="text-orange-400 font-medium">{formatMoney(monthlyPayment * loanTerm - (loanAmount - downPayment))}</span>
+                  <span className="text-orange-400 font-medium">
+                    {formatMoney(
+                      monthlyPayment * loanTerm - (loanAmount - downPayment)
+                    )}
+                  </span>
                 </div>
               </div>
             </div>
@@ -281,13 +314,21 @@ export default function LoanCalculator() {
         }
 
         .slider::-webkit-slider-track {
-          background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+          background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.1)
+          );
           border-radius: 10px;
           height: 8px;
         }
 
         .slider::-moz-range-track {
-          background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+          background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.1)
+          );
           border-radius: 10px;
           height: 8px;
           border: none;

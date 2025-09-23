@@ -125,7 +125,7 @@ export default function Circle() {
   };
 
   return (
-    <div className="flex justify-center items-center pt-[200px] flex-col w-full min-h-screen bg-[#181414] overflow-x-hidden">
+    <div className="flex justify-center items-center pt-[200px] flex-col w-full min-h-screen bg-[#18141414] overflow-x-hidden">
       <motion.div
         className="flex justify-center items-center flex-col gap-[100px] max-w-[1160px]"
         initial="hidden"
@@ -133,13 +133,17 @@ export default function Circle() {
         variants={containerVariants}
       >
         <motion.div
-          className="flex font-montserrat  text-[45px] lg:text-[3.5vw] font-bold text-white uppercase"
+          className="flex text-[45px] lg:text-[3.5vw] text-white uppercase"
           style={{
             fontFamily: "Montserrat",
             verticalAlign: "top",
             margin: "0 auto",
             marginBottom: "0px",
             width: "auto",
+            fontWeight: "900",
+            letterSpacing: "0.05em",
+            textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
+            WebkitTextStroke: "0.5px rgba(255,255,255,0.3)",
           }}
           variants={fadeInVariants}
         >
@@ -147,16 +151,23 @@ export default function Circle() {
         </motion.div>
 
         <motion.div
-          className="flex font-montserrat mt-[40px] mb-[40px] w-[80vw] xl:w-[100vw] justify-center items-center  font-semibold text-[24px] text-[#777] text-center"
+          className="mt-[40px] mb-[40px] w-[80vw] xl:w-[100vw] justify-center items-center font-light text-[36px] text-white text-center"
+          style={{
+            fontFamily: "Montserrat, sans-serif",
+            fontWeight: "100",
+            letterSpacing: "0.01em",
+          }}
           variants={fadeInVariants}
         >
           {isEnglish ? (
             <>
-              A circle of cooperation to create <br /> valuable assets and values <br /> for future generations
+              A circle of cooperation to create <br /> valuable assets and
+              values <br /> for future generations
             </>
           ) : (
             <>
-              Ашид өвлөгдөх үнэт хөрөнгө, үнэ цэн <br /> бүрийг хамт бүтээх хамтын ажиллагааны <br /> хүрээлэл
+              Ашид өвлөгдөх үнэт хөрөнгө, үнэ цэн <br /> бүрийг хамт бүтээх
+              хамтын ажиллагааны <br /> хүрээлэл
             </>
           )}
         </motion.div>
@@ -191,10 +202,18 @@ export default function Circle() {
           </div>
         </motion.div>
 
-        <motion.div variants={fadeInVariants} className="mt-8 sm:mt-10 md:mt-12 mb-8 sm:mb-10 md:mb-12 w-full max-w-4xl px-4 sm:px-6">
+        <motion.div
+          variants={fadeInVariants}
+          className="mt-8 sm:mt-10 md:mt-12 mb-8 sm:mb-10 md:mb-12 w-full max-w-4xl px-4 sm:px-6"
+        >
           <div className="relative overflow-hidden">
             <div className="relative h-32 sm:h-40 md:h-48 lg:h-52">
-              <AnimatePresence initial={false} custom={direction} mode="wait" onExitComplete={() => setIsAnimating(false)}>
+              <AnimatePresence
+                initial={false}
+                custom={direction}
+                mode="wait"
+                onExitComplete={() => setIsAnimating(false)}
+              >
                 <motion.div
                   key={currentSlide}
                   custom={direction}
@@ -206,11 +225,15 @@ export default function Circle() {
                 >
                   <div className="text-center">
                     <p
-                      className="text-sm sm:text-base md:text-lg lg:text-xl text-white/70 mb-3 sm:mb-4 leading-relaxed"
+                      className="text-sm sm:text-base md:text-lg lg:text-[14px] text-white/70 mb-3 sm:mb-4 leading-relaxed"
                       style={{ fontFamily: "Montserrat" }}
-                      dangerouslySetInnerHTML={{ __html: testimonials[currentSlide].content }}
+                      dangerouslySetInnerHTML={{
+                        __html: testimonials[currentSlide].content,
+                      }}
                     />
-                    <p className="text-sm sm:text-base md:text-lg text-white/70 font-medium">{testimonials[currentSlide].author}</p>
+                    <p className="text-sm sm:text-base md:text-lg lg:text-[14px] text-white/70 font-montserrat font-light">
+                      {testimonials[currentSlide].author}
+                    </p>
                   </div>
                 </motion.div>
               </AnimatePresence>
@@ -224,8 +247,19 @@ export default function Circle() {
                 className="text-white hover:text-gray-300 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed p-2"
                 aria-label="Previous testimonial"
               >
-                <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <svg
+                  className="w-5 h-5 sm:w-6 sm:h-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15 18L9 12L15 6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </button>
               <button
@@ -234,8 +268,19 @@ export default function Circle() {
                 className="text-white hover:text-gray-300 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed p-2"
                 aria-label="Next testimonial"
               >
-                <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <svg
+                  className="w-5 h-5 sm:w-6 sm:h-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9 18L15 12L9 6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </button>
             </div>
@@ -252,7 +297,12 @@ export default function Circle() {
         >
           <Link href="/contact">
             <motion.div
-              className="flex mt-[100px] mb-[40px] text-[45px] text-white text-center hover:opacity-80 transition-opacity duration-300"
+              className="flex mt-[100px] mb-[40px] text-[61px] text-white text-center hover:opacity-80 transition-opacity duration-300"
+              style={{
+                fontFamily: "Montserrat, sans-serif ",
+                fontWeight: "300",
+                letterSpacing: "0.01em",
+              }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >

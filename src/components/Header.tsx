@@ -43,30 +43,47 @@ export default function Header() {
   return (
     <header
       className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-black/20 backdrop-blur-md border-b border-white/10" : "bg-transparent"
+        scrolled
+          ? "bg-black/20 backdrop-blur-md border-b border-white/10"
+          : "bg-transparent"
       }`}
     >
       {/* Option 1: Much wider - only small side margins */}
       <div className=" mx-[50px] px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-24">
           <div className="flex items-center gap-3">
-            <Image src="/Logo2.png" alt="logo" width={80} height={50} className="w-16 object-contain h-10 sm:w-20 sm:h-12" />
-            <div className="h-[50px] w-[1px] bg-white"></div>
+            <Image
+              src="/Logo2.png"
+              alt="logo"
+              width={80}
+              height={50}
+              className="w-16 object-contain h-10 sm:w-20 sm:h-12"
+            />
+            {/* <div className="h-[50px] w-[1px] bg-white"></div>
             <div className="">
-              <h1 className="text-white text-sm sm:text-base font-bold" style={{ fontFamily: "Montserrat" }}>
+              <h1
+                className="text-white text-sm sm:text-base font-bold"
+                style={{ fontFamily: "Montserrat" }}
+              >
                 ЗЭЭЛИЙН ШИЙДВЭР
               </h1>
-              <h1 className="text-white text-sm sm:text-base font-bold" style={{ fontFamily: "Montserrat" }}>
+              <h1
+                className="text-white text-sm sm:text-base font-bold"
+                style={{ fontFamily: "Montserrat" }}
+              >
                 1 ӨДӨРТ
               </h1>
-            </div>
+            </div> */}
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center  gap-[20px] space-x-2">
             {navItems.map((item) => (
               <Link key={item.href} href={item.href}>
-                <p className="relative text-white group overflow-hidden h-[24px] font-medium" style={{ fontFamily: "Montserrat" }}>
+                <p
+                  className="relative text-white group overflow-hidden h-[24px] font-[12px] "
+                  style={{ fontFamily: "Montserrat" }}
+                >
                   <span className="block transition-all duration-300 group-hover:opacity-0 group-hover:-translate-y-1">
                     {isEnglish ? item.en : item.mn}
                   </span>
@@ -83,14 +100,21 @@ export default function Header() {
                 className="flex items-center space-x-1 text-white hover:text-blue-400 transition-colors p-3 relative rounded-lg hover:bg-white/10"
                 style={{ fontFamily: "Montserrat" }}
               >
-                <span className="font-medium">{isEnglish ? "Language" : "Хэл"}</span>
+                <span className="font-medium">
+                  {isEnglish ? "Language" : "Хэл"}
+                </span>
                 <svg
                   className="w-4 h-4 transform transition-transform duration-200 group-hover:rotate-180"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </button>
 
@@ -128,12 +152,34 @@ export default function Header() {
             >
               <span className="sr-only">Open main menu</span>
               {!isOpen ? (
-                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                <svg
+                  className="block h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16m-7 6h7"
+                  />
                 </svg>
               ) : (
-                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <svg
+                  className="block h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               )}
             </button>
@@ -142,13 +188,23 @@ export default function Header() {
       </div>
 
       {/* Mobile menu */}
-      <div className={`md:hidden mobile-menu transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? "max-h-screen" : "max-h-0"}`}>
+      <div
+        className={`md:hidden mobile-menu transition-all duration-300 ease-in-out overflow-hidden ${
+          isOpen ? "max-h-screen" : "max-h-0"
+        }`}
+      >
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px- min-h-screen bg-black/90 backdrop-blur-md border-t border-white/10">
           {navItems.map((item) => (
-            <Link key={item.href} href={item.href} onClick={() => setIsOpen(false)}>
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setIsOpen(false)}
+            >
               <div
                 className="block px-3 py-4 text-white hover:bg-white/10 rounded-md transition-colors font-medium"
-                style={{ fontFamily: "Montserrat" }}
+                style={{
+                  fontFamily: "Montserrat !important",
+                }}
               >
                 {isEnglish ? item.en : item.mn}
               </div>
@@ -163,7 +219,11 @@ export default function Header() {
                   if (isEnglish) toggleLanguage();
                   setIsOpen(false);
                 }}
-                className={`px-4 py-2 rounded-md transition-colors font-medium ${!isEnglish ? "bg-white/10 text-white" : "bg-white/5 text-white/70"}`}
+                className={`px-4 py-2 rounded-md transition-colors font-medium ${
+                  !isEnglish
+                    ? "bg-white/10 text-white"
+                    : "bg-white/5 text-white/70"
+                }`}
                 style={{ fontFamily: "Montserrat" }}
               >
                 🇲🇳 Монгол
@@ -173,7 +233,11 @@ export default function Header() {
                   if (!isEnglish) toggleLanguage();
                   setIsOpen(false);
                 }}
-                className={`px-4 py-2 rounded-md transition-colors font-medium ${isEnglish ? "bg-white/10 text-white" : "bg-white/5 text-white/70"}`}
+                className={`px-4 py-2 rounded-md transition-colors font-medium ${
+                  isEnglish
+                    ? "bg-white/10 text-white"
+                    : "bg-white/5 text-white/70"
+                }`}
                 style={{ fontFamily: "Montserrat" }}
               >
                 🇺🇸 English

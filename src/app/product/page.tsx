@@ -62,37 +62,61 @@ export default function Product() {
   const materials = {
     eMongolia: [
       isEnglish ? "ID card reference" : "Иргэний үнэмлэхний лавлагаа",
-      isEnglish ? "Residential address reference" : "Оршин суугаа хаягын лавлагаа",
+      isEnglish
+        ? "Residential address reference"
+        : "Оршин суугаа хаягын лавлагаа",
       isEnglish
         ? "Marriage registration reference / non-marriage registration reference"
         : "Гэрлэлт бүртгэсний лавлагаа/ гэрлэлт бүртгэгдээгүй лавлагаа",
       isEnglish ? "Real Estate List reference" : "ҮХХ-ийн жагсаалтын лавлагаа",
-      isEnglish ? "Vehicle ownership reference" : "Тээврийн хэрэгсэл өмчилж буй лавлагаа",
-      isEnglish ? "Reference of no debt to others by court decision" : "Шүүхийн шийдвэрээр бусдад өр төлбөргүй лавлагаа",
+      isEnglish
+        ? "Vehicle ownership reference"
+        : "Тээврийн хэрэгсэл өмчилж буй лавлагаа",
+      isEnglish
+        ? "Reference of no debt to others by court decision"
+        : "Шүүхийн шийдвэрээр бусдад өр төлбөргүй лавлагаа",
     ],
     incomeProof: {
       salary: [
-        isEnglish ? "Bank statement for the last 12 months" : "Дансны хуулга сүүлийн 12 сараар",
+        isEnglish
+          ? "Bank statement for the last 12 months"
+          : "Дансны хуулга сүүлийн 12 сараар",
         isEnglish ? "Employment certificate" : "Ажлын газрын тодорхойлолт",
         isEnglish
           ? "If active loan, loan agreement, repayment schedule, loan account statement"
           : "Идэвхитэй зээлтэй бол зээлийн гэрээ, эргэн төлөлтийн хуваарь, зээлийн дансны хуулга",
       ],
       business: [
-        isEnglish ? "Bank statement for the last 12 months" : "Дансны хуулга сүүлийн 12 сараар",
-        isEnglish ? "Copy of company certificate, charter, special license" : "ААН-ийн гэрчилгээ, дүрэм, тусгай зөвшөөрөлийн хуулбар",
-        isEnglish ? "Financial statement for the last 1 year" : "Сүүлийн 1 жилийн Санхүүгийн Тайлан",
-        isEnglish ? "Copies of business-related work agreements" : "Бизнестэй холбоотой ажлын гэрээнүүдийн хуулбар",
+        isEnglish
+          ? "Bank statement for the last 12 months"
+          : "Дансны хуулга сүүлийн 12 сараар",
+        isEnglish
+          ? "Copy of company certificate, charter, special license"
+          : "ААН-ийн гэрчилгээ, дүрэм, тусгай зөвшөөрөлийн хуулбар",
+        isEnglish
+          ? "Financial statement for the last 1 year"
+          : "Сүүлийн 1 жилийн Санхүүгийн Тайлан",
+        isEnglish
+          ? "Copies of business-related work agreements"
+          : "Бизнестэй холбоотой ажлын гэрээнүүдийн хуулбар",
         isEnglish
           ? "If active loan, loan agreement, repayment schedule, loan account statement"
           : "Идэвхитэй зээлтэй бол зээлийн гэрээ, эргэн төлөлтийн хуваарь, зээлийн дансны хуулга",
       ],
     },
     housingInfo: [
-      isEnglish ? "Interior and exterior photos of the property to be purchased" : "Авах байрны дотор гаднах зураг",
-      isEnglish ? "Proof of paid down payment or ability to pay" : "Урьдчилгаа төлбөрийг төлсөн, эсвэл төлөх чадвартайг нотлох баримт",
-      isEnglish ? "Copy of real estate certificate or reservation agreement" : "ҮХХ-ийн гэрчилгээний хуулбар, эсвэл захиалгын гэрээ",
-      isEnglish ? "Property rights registration reference (E-Mongolia)" : "Эд хөрөнгийн эрхийн бүртгэлийн лавлагаа (E-Mongolia)",
+      isEnglish
+        ? "Interior and exterior photos of the property to be purchased"
+        : "Авах байрны дотор гаднах зураг",
+      isEnglish
+        ? "Proof of paid down payment or ability to pay"
+        : "Урьдчилгаа төлбөрийг төлсөн, эсвэл төлөх чадвартайг нотлох баримт",
+      isEnglish
+        ? "Copy of real estate certificate or reservation agreement"
+        : "ҮХХ-ийн гэрчилгээний хуулбар, эсвэл захиалгын гэрээ",
+      isEnglish
+        ? "Property rights registration reference (E-Mongolia)"
+        : "Эд хөрөнгийн эрхийн бүртгэлийн лавлагаа (E-Mongolia)",
     ],
   };
 
@@ -105,8 +129,22 @@ export default function Product() {
         variants={containerVariants}
       >
         {/* Loan Products */}
-        <motion.div variants={fadeInVariants} className="space-y-8 w-full max-w-6xl">
-          <h2 className="text-3xl font-bold text-white mb-8 text-center" style={{ fontFamily: "Montserrat" }}>
+        <motion.div
+          variants={fadeInVariants}
+          className="space-y-8 w-full max-w-6xl"
+        >
+          <h2
+            className="text-3xl font-bold text-white mb-8 text-center text-[36px]"
+            style={{
+              fontFamily: "Montserrat",
+              fontSize: "60px",
+              width: "auto",
+              fontWeight: "300",
+              letterSpacing: "0.001em",
+              textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
+              WebkitTextStroke: "0.5px rgba(255,255,255,0.3)",
+            }}
+          >
             {isEnglish ? "Loan Products" : "Зээлийн бүтээгдэхүүн"}
           </h2>
 
@@ -117,42 +155,74 @@ export default function Product() {
                 className="bg-white/5 border border-white/10 rounded-lg p-6 hover:bg-white/10 transition-all duration-300"
                 whileHover={{ scale: 1.02 }}
               >
-                <h3 className="text-xl font-bold text-white mb-4" style={{ fontFamily: "Montserrat" }}>
+                <h3
+                  className="text-xl font-semibold text-white mb-4"
+                  style={{ fontFamily: "Montserrat" }}
+                >
                   {product.title}
                 </h3>
-                <p className="text-gray-300 mb-6 leading-relaxed" style={{ fontFamily: "Montserrat" }}>
+                <p
+                  className="text-gray-300 mb-6 leading-relaxed"
+                  style={{ fontFamily: "Montserrat" }}
+                >
                   {product.description}
                 </p>
 
                 <div className="relative w-full h-48 mb-6 rounded-lg overflow-hidden">
-                  <Image src={product.image} alt={product.title} fill className="object-cover" />
+                  <Image
+                    src={product.image}
+                    alt={product.title}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
 
                 <div className="grid grid-cols-1 gap-4 mb-6">
                   <div className="bg-white/5 p-4 rounded-lg">
-                    <p className="text-sm text-gray-400 mb-1" style={{ fontFamily: "Montserrat" }}>
+                    <p
+                      className="text-sm text-gray-400 mb-1"
+                      style={{ fontFamily: "Montserrat" }}
+                    >
                       {isEnglish ? "Loan amount" : "Зээлийн хэмжээ"}
                     </p>
-                    <p className="text-white font-semibold" style={{ fontFamily: "Montserrat" }}>
+                    <p
+                      className="text-white font-semibold"
+                      style={{ fontFamily: "Montserrat" }}
+                    >
                       {product.amount}
                     </p>
                   </div>
                   <div className="bg-white/5 p-4 rounded-lg">
-                    <p className="text-sm text-gray-400 mb-1" style={{ fontFamily: "Montserrat" }}>
+                    <p
+                      className="text-sm text-gray-400 mb-1"
+                      style={{ fontFamily: "Montserrat" }}
+                    >
                       {isEnglish ? "Term" : "Хугацаа"}
                     </p>
-                    <p className="text-white font-semibold" style={{ fontFamily: "Montserrat" }}>
+                    <p
+                      className="text-white font-semibold"
+                      style={{ fontFamily: "Montserrat" }}
+                    >
                       {product.term}
                     </p>
                   </div>
                   <div className="bg-white/5 p-4 rounded-lg">
-                    <p className="text-sm text-gray-400 mb-1" style={{ fontFamily: "Montserrat" }}>
+                    <p
+                      className="text-sm text-gray-400 mb-1"
+                      style={{ fontFamily: "Montserrat" }}
+                    >
                       {isEnglish ? "Interest" : "Хүү"}
                     </p>
-                    <p className="text-white font-semibold" style={{ fontFamily: "Montserrat" }}>
+                    <p
+                      className="text-white font-semibold"
+                      style={{ fontFamily: "Montserrat" }}
+                    >
                       {isEnglish ? "Monthly" : "Сарын"}: {product.monthlyRate}%
                     </p>
-                    <p className="text-white font-semibold" style={{ fontFamily: "Montserrat" }}>
+                    <p
+                      className="text-white font-semibold"
+                      style={{ fontFamily: "Montserrat" }}
+                    >
                       {isEnglish ? "Annual" : "Жилийн"}: {product.annualRate}%
                     </p>
                   </div>
@@ -191,12 +261,30 @@ export default function Product() {
               <div className="p-6">
                 {/* Modal Header */}
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-2xl font-bold text-white" style={{ fontFamily: "Montserrat" }}>
-                    {isEnglish ? "Loan Requirements & Materials" : "Зээлийн шаардлага болон материал"}
+                  <h2
+                    className="text-2xl font-bold text-white"
+                    style={{ fontFamily: "Montserrat" }}
+                  >
+                    {isEnglish
+                      ? "Loan Requirements & Materials"
+                      : "Зээлийн шаардлага болон материал"}
                   </h2>
-                  <button onClick={() => setIsModalOpen(false)} className="text-gray-400 hover:text-white transition-colors duration-200">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <button
+                    onClick={() => setIsModalOpen(false)}
+                    className="text-gray-400 hover:text-white transition-colors duration-200"
+                  >
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
                     </svg>
                   </button>
                 </div>
@@ -204,14 +292,23 @@ export default function Product() {
                 <div className="space-y-8">
                   {/* Loan Requirements */}
                   <div className="bg-white/5 border border-white/10 rounded-lg p-6">
-                    <h3 className="text-xl font-bold text-white mb-6" style={{ fontFamily: "Montserrat" }}>
+                    <h3
+                      className="text-xl font-bold text-white mb-6"
+                      style={{ fontFamily: "Montserrat" }}
+                    >
                       {isEnglish ? "Loan Requirements" : "Зээлийн шаардлага"}
                     </h3>
                     <div className="space-y-3">
                       {requirements.map((requirement, index) => (
-                        <div key={index} className="flex items-center space-x-3">
+                        <div
+                          key={index}
+                          className="flex items-center space-x-3"
+                        >
                           <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                          <p className="text-gray-300" style={{ fontFamily: "Montserrat" }}>
+                          <p
+                            className="text-gray-300"
+                            style={{ fontFamily: "Montserrat" }}
+                          >
                             {requirement}
                           </p>
                         </div>
@@ -221,24 +318,42 @@ export default function Product() {
 
                   {/* Required Materials */}
                   <div className="bg-white/5 border border-white/10 rounded-lg p-6">
-                    <h3 className="text-xl font-bold text-white mb-6" style={{ fontFamily: "Montserrat" }}>
+                    <h3
+                      className="text-xl font-bold text-white mb-6"
+                      style={{ fontFamily: "Montserrat" }}
+                    >
                       {isEnglish ? "Required Materials" : "Бүрдүүлэх материал"}
                     </h3>
-                    <p className="text-sm text-gray-400 mb-6" style={{ fontFamily: "Montserrat" }}>
-                      {isEnglish ? "Decision valid for 60 days" : "Шийдвэр 60 хоног хүчинтэй"}
+                    <p
+                      className="text-sm text-gray-400 mb-6"
+                      style={{ fontFamily: "Montserrat" }}
+                    >
+                      {isEnglish
+                        ? "Decision valid for 60 days"
+                        : "Шийдвэр 60 хоног хүчинтэй"}
                     </p>
 
                     <div className="space-y-6">
                       {/* E-Mongolia */}
                       <div>
-                        <h4 className="text-lg font-semibold text-white mb-3" style={{ fontFamily: "Montserrat" }}>
-                          {isEnglish ? "Reference from E-Mongolia" : "E-MONGOLIA-ААС ЛАВЛАГАА"}
+                        <h4
+                          className="text-lg font-semibold text-white mb-3"
+                          style={{ fontFamily: "Montserrat" }}
+                        >
+                          {isEnglish
+                            ? "Reference from E-Mongolia"
+                            : "E-MONGOLIA-ААС ЛАВЛАГАА"}
                         </h4>
                         <ul className="space-y-2">
                           {materials.eMongolia.map((item, index) => (
-                            <li key={index} className="text-gray-300 text-sm flex items-start space-x-2">
+                            <li
+                              key={index}
+                              className="text-gray-300 text-sm flex items-start space-x-2"
+                            >
                               <span className="text-blue-400 mt-1">•</span>
-                              <span style={{ fontFamily: "Montserrat" }}>{item}</span>
+                              <span style={{ fontFamily: "Montserrat" }}>
+                                {item}
+                              </span>
                             </li>
                           ))}
                         </ul>
@@ -246,36 +361,65 @@ export default function Product() {
 
                       {/* Income Proof */}
                       <div>
-                        <h4 className="text-lg font-semibold text-white mb-3" style={{ fontFamily: "Montserrat" }}>
-                          {isEnglish ? "Income Proof Documents" : "Орлого нотлох баримт"}
+                        <h4
+                          className="text-lg font-semibold text-white mb-3"
+                          style={{ fontFamily: "Montserrat" }}
+                        >
+                          {isEnglish
+                            ? "Income Proof Documents"
+                            : "Орлого нотлох баримт"}
                         </h4>
 
                         <div className="space-y-4">
                           <div>
-                            <h5 className="text-md font-medium text-blue-400 mb-2" style={{ fontFamily: "Montserrat" }}>
+                            <h5
+                              className="text-md font-medium text-blue-400 mb-2"
+                              style={{ fontFamily: "Montserrat" }}
+                            >
                               {isEnglish ? "Salary" : "Цалин"}
                             </h5>
                             <ul className="space-y-1 ml-4">
-                              {materials.incomeProof.salary.map((item, index) => (
-                                <li key={index} className="text-gray-300 text-sm flex items-start space-x-2">
-                                  <span className="text-blue-400 mt-1">•</span>
-                                  <span style={{ fontFamily: "Montserrat" }}>{item}</span>
-                                </li>
-                              ))}
+                              {materials.incomeProof.salary.map(
+                                (item, index) => (
+                                  <li
+                                    key={index}
+                                    className="text-gray-300 text-sm flex items-start space-x-2"
+                                  >
+                                    <span className="text-blue-400 mt-1">
+                                      •
+                                    </span>
+                                    <span style={{ fontFamily: "Montserrat" }}>
+                                      {item}
+                                    </span>
+                                  </li>
+                                )
+                              )}
                             </ul>
                           </div>
 
                           <div>
-                            <h5 className="text-md font-medium text-blue-400 mb-2" style={{ fontFamily: "Montserrat" }}>
+                            <h5
+                              className="text-md font-medium text-blue-400 mb-2"
+                              style={{ fontFamily: "Montserrat" }}
+                            >
                               {isEnglish ? "Business" : "Бизнес"}
                             </h5>
                             <ul className="space-y-1 ml-4">
-                              {materials.incomeProof.business.map((item, index) => (
-                                <li key={index} className="text-gray-300 text-sm flex items-start space-x-2">
-                                  <span className="text-blue-400 mt-1">•</span>
-                                  <span style={{ fontFamily: "Montserrat" }}>{item}</span>
-                                </li>
-                              ))}
+                              {materials.incomeProof.business.map(
+                                (item, index) => (
+                                  <li
+                                    key={index}
+                                    className="text-gray-300 text-sm flex items-start space-x-2"
+                                  >
+                                    <span className="text-blue-400 mt-1">
+                                      •
+                                    </span>
+                                    <span style={{ fontFamily: "Montserrat" }}>
+                                      {item}
+                                    </span>
+                                  </li>
+                                )
+                              )}
                             </ul>
                           </div>
                         </div>
@@ -283,14 +427,24 @@ export default function Product() {
 
                       {/* Housing Information */}
                       <div>
-                        <h4 className="text-lg font-semibold text-white mb-3" style={{ fontFamily: "Montserrat" }}>
-                          {isEnglish ? "Housing Information" : "Орон сууцны мэдээлэл"}
+                        <h4
+                          className="text-lg font-semibold text-white mb-3"
+                          style={{ fontFamily: "Montserrat" }}
+                        >
+                          {isEnglish
+                            ? "Housing Information"
+                            : "Орон сууцны мэдээлэл"}
                         </h4>
                         <ul className="space-y-2">
                           {materials.housingInfo.map((item, index) => (
-                            <li key={index} className="text-gray-300 text-sm flex items-start space-x-2">
+                            <li
+                              key={index}
+                              className="text-gray-300 text-sm flex items-start space-x-2"
+                            >
                               <span className="text-blue-400 mt-1">•</span>
-                              <span style={{ fontFamily: "Montserrat" }}>{item}</span>
+                              <span style={{ fontFamily: "Montserrat" }}>
+                                {item}
+                              </span>
                             </li>
                           ))}
                         </ul>
