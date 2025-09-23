@@ -261,92 +261,44 @@ export default function Footer({ isHomePage = false }: FooterProps) {
 
   return (
     <div
-      className={`w-full not-[]: px-[10vw] py-[100px] ${
+      className={`w-full fixed bottom-0 not-[]: px-[10vw]  ${
         isHomePage ? "bg-transparen" : "bg-[#181414]"
       }`}
     >
       <div className="flex w-full justify-between items-center">
         {/* Зүүн тал */}
         <div className="group flex flex-col gap-2 relative">
-          <p className="cursor-pointer text-white">#шинийг #шуурхай</p>
+          <p
+            className="cursor-pointer text-white"
+            style={{ fontFamily: "Montserrat" }}
+          >
+            #шинийг #шуурхай
+          </p>
           <Link href="https://www.xacleasing.mn/">
             <p className="max-h-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:max-h-20 text-white">
               Хас лизинг
             </p>
           </Link>
         </div>
-        <div className="flex gap-3">
-          {/* Орон сууц хайх */}
-          <div className="group flex flex-col gap-2 relative">
-            <div className="flex justify-center">
-              <motion.button
-                className="h-14 bg-white/20 backdrop-blur-md text-white font-semibold px-8 rounded-lg transition-all duration-300 transform shadow-2xl border border-white/30 hover:bg-white/30 flex items-center"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Орон сууц хайх
-              </motion.button>
-            </div>
-
-            {/* Dropdown линкүүд */}
-            <div className="opacity-0 translate-y-[-10px] pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 ease-in-out flex flex-col gap-2 pl-2">
-              <Link
-                href="https://www.remax.mn/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-gray-300 hover:text-blue-400 transition-colors duration-200 flex items-center gap-2"
-              >
-                RE/MAX Mongolia
-              </Link>
-              <Link
-                href="https://www.unegui.mn/l-hdlh/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-gray-300 hover:text-blue-400 transition-colors duration-200 flex items-center gap-2"
-              >
-                Unegui
-              </Link>
-            </div>
-          </div>
-
-          {/* Тооцоолуур */}
-          <Link href="/calculator">
-            <div className="flex justify-center">
-              <motion.button
-                className="h-14 bg-white/20 backdrop-blur-md text-white font-semibold px-8 rounded-lg transition-all duration-300 transform shadow-2xl border border-white/30 hover:bg-white/30 flex items-center"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Тооцоолуур
-              </motion.button>
-            </div>
-          </Link>
-
-          {/* Хүсэлт илгээх */}
-          <div className="flex justify-center">
-            <motion.button
-              onClick={() => setShowLoanPopup(true)}
-              className="h-14 bg-white/20 backdrop-blur-md text-white font-semibold px-8 rounded-lg transition-all duration-300 transform shadow-2xl border border-white/30 hover:bg-white/30 flex items-center"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Хүсэлт илгээх
-            </motion.button>
-          </div>
-        </div>
 
         {/* Баруун тал */}
         <div className="group flex flex-col gap-[50px] items-start">
           <div className="flex items-center justify-center gap-[30px] cursor-pointer">
-            <p className="text-[15px] font-bold text-white"> Social </p>
+            <p
+              className="text-[15px] font-bold text-white"
+              style={{ fontFamily: "Montserrat" }}
+            >
+              {" "}
+              Social{" "}
+            </p>
             <FaShareAlt size={15} color="white" />
           </div>
           <div className="max-h-0 text-white flex justify-between w-full items-center overflow-hidden transition-all duration-500 ease-in-out group-hover:max-h-20">
             <Link href="https://www.instagram.com/xacmortgage/">
-              <p>In</p>
+              <p style={{ fontFamily: "Montserrat" }}>In</p>
             </Link>
             <Link href="https://www.facebook.com/XacMortgage">
-              <p>Fb</p>
+              <p style={{ fontFamily: "Montserrat" }}>Fb</p>
             </Link>
           </div>
         </div>

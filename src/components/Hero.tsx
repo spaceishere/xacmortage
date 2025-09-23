@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Great_Vibes } from "next/font/google";
 import { FiChevronLeft, FiChevronRight, FiX } from "react-icons/fi";
+import Link from "next/link";
 
 const greatVibes = Great_Vibes({
   weight: "400",
@@ -11,7 +12,7 @@ const greatVibes = Great_Vibes({
 });
 
 const videos = [
-  { src: "/hero/room.mp4", text: "Хүндлэл" },
+  { src: "/hero/apart.mp4", text: "Хүндлэл" },
   { src: "/hero/downtown.mp4", text: "Тав тухыг мэдрүүлэн" },
   { src: "/hero/room.mp4", text: "Цаг хугацааг хэмнэх" },
 ];
@@ -59,7 +60,13 @@ export default function Hero() {
     smsPhone: "",
   });
 
-  const districts = ["Хан-Уул", "Баянзүрх", "Сүхбаатар", "Сонгино-Хайрхан", "Баянгол"];
+  const districts = [
+    "Хан-Уул",
+    "Баянзүрх",
+    "Сүхбаатар",
+    "Сонгино-Хайрхан",
+    "Баянгол",
+  ];
   const ageRanges = ["80-аас доош", "80-90", "91-100", "101-200"];
 
   useEffect(() => {
@@ -97,7 +104,10 @@ export default function Hero() {
     };
   }, [index, locked, lastScrollTime, showLoanPopup]);
 
-  const handleInputChange = (field: keyof FormData, value: string | { call: boolean; sms: boolean }) => {
+  const handleInputChange = (
+    field: keyof FormData,
+    value: string | { call: boolean; sms: boolean }
+  ) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value,
@@ -184,8 +194,8 @@ export default function Hero() {
   if (!currentVideo) return null;
 
   return (
-    <>
-      <section className="relative h-screen w-full overflow-hidden">
+    <div className="flex ">
+      <section className="relative  h-screen w-full overflow-hidden">
         {/* Background video */}
         <div className="fixed inset-0 -z-10">
           <AnimatePresence mode="wait" custom={direction}>
@@ -228,9 +238,13 @@ export default function Hero() {
                     <div className="w-[10%] h-[1px] bg-white/30"></div>
 
                     <div className="text-white flex justify-center items-center text-2xl font-light font-mono flex-shrink-0">
-                      <span className="opacity-70">{String(index + 1).padStart(2, "0")}</span>
+                      <span className="opacity-70">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
                       <span className="opacity-30 mx-1">|</span>
-                      <span className="opacity-30">{String(videos.length).padStart(2, "0")}</span>
+                      <span className="opacity-30">
+                        {String(videos.length).padStart(2, "0")}
+                      </span>
                     </div>
 
                     <div className="flex-1 h-[1px] bg-white/30"></div>
@@ -245,7 +259,8 @@ export default function Hero() {
                         transition={{ duration: 0.8, ease: "easeOut" }}
                       >
                         <h1
-                          className={`text-white text-5xl md:text-7xl lg:text-8xl drop-shadow-lg ${greatVibes.className} whitespace-normal max-w-4xl mx-auto text-center leading-tight`}
+                          style={{ fontFamily: "Montana" }}
+                          className={`text-white text-5xl md:text-7xl lg:text-8xl drop-shadow-lg whitespace-normal max-w-4xl mx-auto text-center leading-tight`}
                         >
                           {currentVideo.text}
                         </h1>
@@ -289,7 +304,9 @@ export default function Hero() {
 
                   {/* --- Зөвхөн md-с доош үед харагдана --- */}
                   <div className="block md:hidden w-full text-center">
-                    <h1 className={`text-white text-4xl drop-shadow-lg ${greatVibes.className} whitespace-normal leading-tight`}>
+                    <h1
+                      className={`text-white text-4xl drop-shadow-lg ${greatVibes.className} whitespace-normal leading-tight`}
+                    >
                       {currentVideo.text}
                     </h1>
                   </div>
@@ -301,12 +318,74 @@ export default function Hero() {
           {/* Хүсэлт илгээх товч */}
         </div>
       </section>
+      <div className="flex  fixed justify-center right-0 h-screen mr-[30px] flex-col gap-[5vh]">
+        {/* Орон сууц хайх */}
+        <div className="group flex flex-col gap-2 relative">
+          <div className="flex justify-center">
+            <motion.button
+              className="h-14 w-48 bg-white/20 backdrop-blur-md text-white font-semibold px-8 rounded-lg transition-all duration-300 transform shadow-2xl border border-white/30 hover:bg-white/30 flex items-center justify-center"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              style={{ fontFamily: "Montserrat" }}
+            >
+              Орон сууц хайх
+            </motion.button>
+          </div>
+
+          {/* Dropdown линкүүд */}
+          <div className="absolute top-full left-1/2 transform -translate-x-1/2 opacity-0 translate-y-[-20px] pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 ease-in-out flex flex-col gap-2 bg-white/10 backdrop-blur-md rounded-lg p-3 border border-white/20">
+            <Link
+              href="https://www.remax.mn/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-gray-300 hover:text-blue-400 transition-colors duration-200 flex items-center gap-2 whitespace-nowrap"
+            >
+              RE/MAX Mongolia
+            </Link>
+            <Link
+              href="https://www.unegui.mn/l-hdlh/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-gray-300 hover:text-blue-400 transition-colors duration-200 flex items-center gap-2 whitespace-nowrap"
+            >
+              Unegui
+            </Link>
+          </div>
+        </div>
+
+        {/* Тооцоолуур */}
+        <Link href="/calculator">
+          <div className="flex justify-center">
+            <motion.button
+              className="h-14 w-48 bg-white/20 backdrop-blur-md text-white font-semibold px-8 rounded-lg transition-all duration-300 transform shadow-2xl border border-white/30 hover:bg-white/30 flex items-center justify-center"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              style={{ fontFamily: "Montserrat" }}
+            >
+              Тооцоолуур
+            </motion.button>
+          </div>
+        </Link>
+
+        {/* Хүсэлт илгээх */}
+        <div className="flex justify-center">
+          <motion.button
+            onClick={() => setShowLoanPopup(true)}
+            className="h-14 w-48 bg-white/20 backdrop-blur-md text-white font-semibold px-8 rounded-lg transition-all duration-300 transform shadow-2xl border border-white/30 hover:bg-white/30 flex items-center justify-center"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            style={{ fontFamily: "Montserrat" }}
+          >
+            Хүсэлт илгээх
+          </motion.button>
+        </div>
+      </div>
 
       {/* Loan Form Popup */}
       <AnimatePresence>
         {showLoanPopup && (
           <motion.div
-            className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 backdrop-blur-sm p-4"
+            className=" inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 backdrop-blur-sm p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -322,7 +401,10 @@ export default function Hero() {
             >
               {/* Header */}
               <div className="bg-orange-500 text-white p-6 text-center relative">
-                <button onClick={closeLoanPopup} className="absolute right-4 top-4 text-white hover:text-gray-200 transition-colors">
+                <button
+                  onClick={closeLoanPopup}
+                  className="absolute right-4 top-4 text-white hover:text-gray-200 transition-colors"
+                >
                   <FiX size={24} />
                 </button>
                 <h1 className="text-2xl font-bold">ХАСБАНК</h1>
@@ -332,44 +414,70 @@ export default function Hero() {
               <form onSubmit={handleLoanSubmit} className="p-8">
                 {/* Section 1: Personal Information */}
                 <div className="mb-8">
-                  <h2 className="text-lg font-semibold mb-4 text-gray-800">1 Хувийн мэдээлэл</h2>
+                  <h2 className="text-lg font-semibold mb-4 text-gray-800">
+                    1 Хувийн мэдээлэл
+                  </h2>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Овог: *</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Овог: *
+                      </label>
                       <input
                         type="text"
                         value={formData.familyName}
-                        onChange={(e) => handleInputChange("familyName", e.target.value)}
+                        onChange={(e) =>
+                          handleInputChange("familyName", e.target.value)
+                        }
                         className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
-                          formErrors.familyName ? "border-red-500 focus:ring-red-500" : "border-gray-300 focus:ring-orange-500"
+                          formErrors.familyName
+                            ? "border-red-500 focus:ring-red-500"
+                            : "border-gray-300 focus:ring-orange-500"
                         }`}
                         required
                       />
-                      {formErrors.familyName && <p className="text-red-500 text-xs mt-1">{formErrors.familyName}</p>}
+                      {formErrors.familyName && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {formErrors.familyName}
+                        </p>
+                      )}
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Нэр: *</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Нэр: *
+                      </label>
                       <input
                         type="text"
                         value={formData.firstName}
-                        onChange={(e) => handleInputChange("firstName", e.target.value)}
+                        onChange={(e) =>
+                          handleInputChange("firstName", e.target.value)
+                        }
                         className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
-                          formErrors.firstName ? "border-red-500 focus:ring-red-500" : "border-gray-300 focus:ring-orange-500"
+                          formErrors.firstName
+                            ? "border-red-500 focus:ring-red-500"
+                            : "border-gray-300 focus:ring-orange-500"
                         }`}
                         required
                       />
-                      {formErrors.firstName && <p className="text-red-500 text-xs mt-1">{formErrors.firstName}</p>}
+                      {formErrors.firstName && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {formErrors.firstName}
+                        </p>
+                      )}
                     </div>
                   </div>
 
                   <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Утас:</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Утас:
+                    </label>
                     <input
                       type="tel"
                       value={formData.phone}
-                      onChange={(e) => handleInputChange("phone", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("phone", e.target.value)
+                      }
                       placeholder="Утасны дугаар"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                     />
@@ -378,12 +486,16 @@ export default function Hero() {
 
                 {/* Section 2: Property Information */}
                 <div className="mb-8">
-                  <h2 className="text-lg font-semibold mb-4 text-gray-800">2 Худалдан авах Орон сууцны мэдээлэл</h2>
+                  <h2 className="text-lg font-semibold mb-4 text-gray-800">
+                    2 Худалдан авах Орон сууцны мэдээлэл
+                  </h2>
 
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div>
                       <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Байршил:</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Байршил:
+                        </label>
                         <select
                           value={formData.location}
                           onChange={(e) => {
@@ -402,29 +514,43 @@ export default function Hero() {
                       </div>
 
                       <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Талбайн хэмжээ:</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Талбайн хэмжээ:
+                        </label>
                         <input
                           type="text"
                           value={formData.area}
-                          onChange={(e) => handleInputChange("area", e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("area", e.target.value)
+                          }
                           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                         />
                       </div>
 
                       <div className="mb-6">
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Худалдан авах үнэ:</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Худалдан авах үнэ:
+                        </label>
                         <input
                           type="text"
                           value={formData.purchasePrice}
-                          onChange={(e) => handleInputChange("purchasePrice", e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("purchasePrice", e.target.value)
+                          }
                           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                         />
                       </div>
 
                       {/* Contact Method */}
                       <div className="mb-6">
-                        <label className="block text-sm font-medium text-gray-700 mb-3">Мэдээлэл авах хэлбэрээ сонгоно уу: *</label>
-                        {formErrors.contactMethod && <p className="text-red-500 text-xs mb-2">{formErrors.contactMethod}</p>}
+                        <label className="block text-sm font-medium text-gray-700 mb-3">
+                          Мэдээлэл авах хэлбэрээ сонгоно уу: *
+                        </label>
+                        {formErrors.contactMethod && (
+                          <p className="text-red-500 text-xs mb-2">
+                            {formErrors.contactMethod}
+                          </p>
+                        )}
 
                         <div className="space-y-4">
                           <div className="flex items-center space-x-3">
@@ -435,20 +561,31 @@ export default function Hero() {
                               onChange={() => handleContactMethodChange("call")}
                               className="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
                             />
-                            <label htmlFor="call" className="text-sm font-medium text-gray-700 min-w-[80px]">
+                            <label
+                              htmlFor="call"
+                              className="text-sm font-medium text-gray-700 min-w-[80px]"
+                            >
                               Утас
                             </label>
                             <input
                               type="tel"
                               placeholder="Утасны дугаар"
                               value={formData.callPhone}
-                              onChange={(e) => handleInputChange("callPhone", e.target.value)}
+                              onChange={(e) =>
+                                handleInputChange("callPhone", e.target.value)
+                              }
                               disabled={!formData.contactMethod.call}
                               className={`flex-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 disabled:bg-gray-100 disabled:cursor-not-allowed ${
-                                formErrors.callPhone ? "border-red-500 focus:ring-red-500" : "border-gray-300 focus:ring-orange-500"
+                                formErrors.callPhone
+                                  ? "border-red-500 focus:ring-red-500"
+                                  : "border-gray-300 focus:ring-orange-500"
                               }`}
                             />
-                            {formErrors.callPhone && <p className="text-red-500 text-xs mt-1 w-full">{formErrors.callPhone}</p>}
+                            {formErrors.callPhone && (
+                              <p className="text-red-500 text-xs mt-1 w-full">
+                                {formErrors.callPhone}
+                              </p>
+                            )}
                           </div>
 
                           <div className="flex items-center space-x-3">
@@ -459,20 +596,31 @@ export default function Hero() {
                               onChange={() => handleContactMethodChange("sms")}
                               className="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
                             />
-                            <label htmlFor="sms" className="text-sm font-medium text-gray-700 min-w-[80px]">
+                            <label
+                              htmlFor="sms"
+                              className="text-sm font-medium text-gray-700 min-w-[80px]"
+                            >
                               SMS/Viber
                             </label>
                             <input
                               type="tel"
                               placeholder="SMS (Viber) утасны дугаар"
                               value={formData.smsPhone}
-                              onChange={(e) => handleInputChange("smsPhone", e.target.value)}
+                              onChange={(e) =>
+                                handleInputChange("smsPhone", e.target.value)
+                              }
                               disabled={!formData.contactMethod.sms}
                               className={`flex-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 disabled:bg-gray-100 disabled:cursor-not-allowed ${
-                                formErrors.smsPhone ? "border-red-500 focus:ring-red-500" : "border-gray-300 focus:ring-orange-500"
+                                formErrors.smsPhone
+                                  ? "border-red-500 focus:ring-red-500"
+                                  : "border-gray-300 focus:ring-orange-500"
                               }`}
                             />
-                            {formErrors.smsPhone && <p className="text-red-500 text-xs mt-1 w-full">{formErrors.smsPhone}</p>}
+                            {formErrors.smsPhone && (
+                              <p className="text-red-500 text-xs mt-1 w-full">
+                                {formErrors.smsPhone}
+                              </p>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -488,7 +636,9 @@ export default function Hero() {
                     {/* Right Column - Districts and Age Selection */}
                     <div>
                       <div className="mb-6">
-                        <h3 className="text-sm font-medium text-gray-700 mb-3">Дүүрэг:</h3>
+                        <h3 className="text-sm font-medium text-gray-700 mb-3">
+                          Дүүрэг:
+                        </h3>
                         <div className="grid grid-cols-2 gap-2">
                           {districts.map((district) => (
                             <button
@@ -511,7 +661,9 @@ export default function Hero() {
                       </div>
 
                       <div className="mb-6">
-                        <h3 className="text-sm font-medium text-gray-700 mb-3">Талбайн сонголт:</h3>
+                        <h3 className="text-sm font-medium text-gray-700 mb-3">
+                          Талбайн сонголт:
+                        </h3>
                         <div className="space-y-2">
                           {ageRanges.map((range) => (
                             <button
@@ -535,12 +687,22 @@ export default function Hero() {
 
                       {/* Contact Information */}
                       <div className="bg-gray-50 p-4 rounded-lg">
-                        <h3 className="text-sm font-medium text-gray-700 mb-2">Хүсэлт илгээх</h3>
-                        <p className="text-xs text-gray-600 mb-2">Таны хүсэлт Амжилттай илгээгдлээ.</p>
+                        <h3 className="text-sm font-medium text-gray-700 mb-2">
+                          Хүсэлт илгээх
+                        </h3>
+                        <p className="text-xs text-gray-600 mb-2">
+                          Таны хүсэлт Амжилттай илгээгдлээ.
+                        </p>
                         <p className="text-xs text-gray-600 mb-1">Бид Танруу</p>
-                        <p className="text-xs text-gray-600 mb-1">(Ажлын өдөр 9:00-17:00 хооронд)</p>
-                        <p className="text-xs text-orange-600 font-medium">8001-0218, 8001-0219-аас холбогдох</p>
-                        <p className="text-xs text-gray-600">дэлгэрэнгүй мэдээлэл өгөх болно.</p>
+                        <p className="text-xs text-gray-600 mb-1">
+                          (Ажлын өдөр 9:00-17:00 хооронд)
+                        </p>
+                        <p className="text-xs text-orange-600 font-medium">
+                          8001-0218, 8001-0219-аас холбогдох
+                        </p>
+                        <p className="text-xs text-gray-600">
+                          дэлгэрэнгүй мэдээлэл өгөх болно.
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -572,20 +734,37 @@ export default function Hero() {
               <div className="text-center">
                 {/* Success Icon with Animation */}
                 <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                  <svg className="w-10 h-10 text-white animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
+                  <svg
+                    className="w-10 h-10 text-white animate-pulse"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="3"
+                      d="M5 13l4 4L19 7"
+                    ></path>
                   </svg>
                 </div>
 
                 {/* Success Message */}
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">Амжилттай илгээгдлээ! ✨</h3>
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                  Амжилттай илгээгдлээ! ✨
+                </h3>
 
                 <div className="bg-orange-50 rounded-lg p-4 mb-6">
                   <p className="text-sm text-gray-700 mb-3 leading-relaxed">
-                    Таны <strong>моргэйжийн хүсэлт</strong> амжилттай бүртгэгдлээ.
+                    Таны <strong>моргэйжийн хүсэлт</strong> амжилттай
+                    бүртгэгдлээ.
                   </p>
-                  <p className="text-sm text-orange-600 font-semibold mb-2">📞 Холбогдох утас: 8001-0218, 8001-0219</p>
-                  <p className="text-xs text-gray-600">⏰ Ажлын өдөр: 9:00-17:00 хооронд</p>
+                  <p className="text-sm text-orange-600 font-semibold mb-2">
+                    📞 Холбогдох утас: 8001-0218, 8001-0219
+                  </p>
+                  <p className="text-xs text-gray-600">
+                    ⏰ Ажлын өдөр: 9:00-17:00 хооронд
+                  </p>
                 </div>
 
                 {/* Action Buttons */}
@@ -609,6 +788,6 @@ export default function Hero() {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }
