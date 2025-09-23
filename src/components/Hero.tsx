@@ -236,7 +236,6 @@ export default function Hero() {
 
                     <div className="flex-1 h-[1px] bg-white/30"></div>
 
-                    {/* Main Text */}
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={currentVideo.text}
