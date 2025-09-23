@@ -253,7 +253,7 @@ export default function Contact() {
             <p
               className="text-white text-xl sm:text-2xl md:text-3xl"
               style={{
-                fontFamily: "Montana, sans-serif",
+                fontFamily: "Montserrat, sans-serif",
                 fontWeight: "300",
                 letterSpacing: "0.02em",
               }}
@@ -263,7 +263,7 @@ export default function Contact() {
             <p
               className="text-white/70 text-[14px] text-center"
               style={{
-                fontFamily: "Montana, sans-serif",
+                fontFamily: "Montserrat, sans-serif",
                 fontWeight: "300",
                 letterSpacing: "0.01em",
               }}
@@ -273,7 +273,7 @@ export default function Contact() {
             <p
               className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl break-all"
               style={{
-                fontFamily: "Montana, sans-serif",
+                fontFamily: "Montserrat, sans-serif",
                 fontWeight: "300",
                 letterSpacing: "0.02em",
               }}
@@ -283,7 +283,8 @@ export default function Contact() {
             <p
               className="text-white/70 text-[14px]"
               style={{
-                fontFamily: "Montana, sans-serif",
+                fontFamily: "Montserrat, sans-serif",
+
                 fontWeight: "300",
                 letterSpacing: "0.01em",
               }}
